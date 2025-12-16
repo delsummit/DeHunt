@@ -59,50 +59,55 @@ extension Color {
         light: Color(hex: "#f6b1b1"),
         dark: Color(hex: "#0C0E10")
     )
-
+    
     static let backgroundSecondary = Color(
         light: Color(hex: "#F5F5F5"),
-        dark: Color(hex: "#1A1D2E")
+        dark: Color(hex: "#1A1F23")
     )
-
+    
     static let backgroundTertiary = Color(
         light: Color(hex: "#EBEBEB"),
-        dark: Color(hex: "#232739")
+        dark: Color(hex: "#23292F")
     )
-
+    
     // MARK: - Text Colors
     static let textPrimary = Color(
         light: Color(hex: "#000000"),
         dark: Color(hex: "#C1DEEA")
     )
-
+    
     static let textSecondary = Color(
         light: Color(hex: "#666666"),
         dark: Color(hex: "#8B9BAD")
     )
-
+    
     static let textTertiary = Color(
         light: Color(hex: "#999999"),
         dark: Color(hex: "#5A6475")
     )
-
+    
+    static let textPositive = Color(
+        light: Color(hex: "#E5E5E5"),
+        dark: Color(hex: "#1C9B75")
+    )
+    
     // MARK: - Button Colors
     static let buttonPrimary = Color(
         light: Color(hex: "#007AFF"),
         dark: Color(hex: "#454B5C")
     )
-
+    
     static let buttonSecondary = Color(
         light: Color(hex: "#E5E5E5"),
         dark: Color(hex: "#252A38")
     )
-
+    
     // MARK: - UI Elements
     static let border = Color(
         light: Color(hex: "#D1D1D6"),
-        dark: Color(hex: "#2A3040")
+        dark: Color(hex: "#586674")
     )
-
+    
     static let divider = Color(
         light: Color(hex: "#E5E5E5"),
         dark: Color(hex: "#1E2230")
@@ -123,4 +128,6 @@ extension ShapeStyle where Self == Color {
     static var textPrimary: Color { Color.textPrimary }
     static var textSecondary: Color { Color.textSecondary }
     static var element: Color { Color.element }
+    static var border: Color { Color.border }
+    static var textPositive: Color { Color.textPositive }
 }
