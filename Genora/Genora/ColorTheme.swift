@@ -87,8 +87,13 @@ extension Color {
     )
     
     static let textPositive = Color(
-        light: Color(hex: "#E5E5E5"),
+        light: Color(hex: "#1C9B75"),
         dark: Color(hex: "#1C9B75")
+    )
+    
+    static let textNegative = Color(
+        light: Color(hex: "#C44B5A"),
+        dark: Color(hex: "#C44B5A")
     )
     
     // MARK: - Button Colors
@@ -115,7 +120,7 @@ extension Color {
     
     static let element = Color(
         light: Color(hex: "#E5E5E5"),
-        dark: Color(hex: "#8795F1")
+        dark: Color(hex: "#16A085")
     )
 }
 
@@ -130,4 +135,6 @@ extension ShapeStyle where Self == Color {
     static var element: Color { Color.element }
     static var border: Color { Color.border }
     static var textPositive: Color { Color.textPositive }
+    static var textNegative: Color { Color.textNegative }
+
 }
