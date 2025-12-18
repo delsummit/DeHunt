@@ -8,15 +8,13 @@
 import SwiftUI
 
 struct MarketOverviewCard: View {
-    let title: String
-    let value: String
-    let subtitle: String
+    let metric: MarketOverviewMetric
     
     @State private var isPressed = false
     
     var body: some View {
         VStack(spacing: 12) {
-            Text(title)
+            Text(metric.title)
                 .font(.headline)
                 .foregroundColor(.textPrimary)
                 .multilineTextAlignment(.center)
@@ -24,14 +22,14 @@ struct MarketOverviewCard: View {
             Spacer()
             
             VStack(spacing: 6) {
-                Text(value)
+                Text(metric.valueText)
                     .font(.system(size: 26, weight: .bold))
-                    .foregroundColor(.textPositive)
+                    .foregroundColor(.textPrimary)
                 
-                Text(subtitle)
+                Text(metric.subtitleText)
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                    .foregroundColor(.textPositive)
+                    .foregroundColor(metric.changeColor)
             }
             
             Spacer()
@@ -60,15 +58,19 @@ struct MarketOverviewCard: View {
 #Preview {
     VStack(spacing: 20) {
         MarketOverviewCard(
-            title: "Total Market TVL",
-            value: "$55.3M", 
-            subtitle: "+12.5%"
+            metric: .tvl(value: 55_300_000, changePercent: 12.5)
         )
         
         MarketOverviewCard(
-            title: "Active Users", 
-            value: "1,234", 
-            subtitle: "+156 today"
+            metric: .averageAPY(percent: 8.5, changePercent: -2.3)
+        )
+        
+        MarketOverviewCard(
+            metric: .topProtocol(name: "Aave", tvl: 12_500_000, changePercent: 5.2)
+        )
+        
+        MarketOverviewCard(
+            metric: .topChain(name: "Ethereum", tvl: 45_000_000, changePercent: -1.5)
         )
     }
     .padding()
