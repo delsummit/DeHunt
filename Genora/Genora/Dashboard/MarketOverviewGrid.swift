@@ -12,18 +12,35 @@ struct MarketOverviewGrid: View {
     
     var body: some View {
         VStack {
-            ForEach(0..<(viewModel.metrics.count / 2), id: \.self) { rowIndex in
-                metricRow(for: rowIndex)
-            }
-            
-            // last card should be large if number is odd
-            if viewModel.metrics.count % 2 != 0, let lastMetric = viewModel.metrics.last {
-                lastMetricCard(lastMetric)
+            if viewModel.metrics.isEmpty {
+                skeletonContent
+            } else {
+                metricsContent
             }
         }
         .padding()
         .background(metricsBackground)
         .overlay(metricsBorder)
+    }
+        
+    @ViewBuilder
+    private var metricsContent: some View {
+        ForEach(0..<(viewModel.metrics.count / 2), id: \.self) { rowIndex in
+            metricRow(for: rowIndex)
+        }
+        
+        if viewModel.metrics.count % 2 != 0, let lastMetric = viewModel.metrics.last {
+            lastMetricCard(lastMetric)
+        }
+    }
+    
+    private var skeletonContent: some View {
+        ForEach(0..<2, id: \.self) { _ in
+            HStack {
+                MarketOverviewCardSkeleton()
+                MarketOverviewCardSkeleton()
+            }
+        }
     }
     
     private func metricRow(for rowIndex: Int) -> some View {
