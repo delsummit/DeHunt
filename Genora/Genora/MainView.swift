@@ -8,21 +8,23 @@
 import SwiftUI
 
 struct MainView: View {
+    @State private var selectedTab: String = "Profile"
+
     var body: some View {
-        TabView {
-            Tab("Dashboard", systemImage: "house") {
+        TabView(selection: $selectedTab) {
+            Tab("Dashboard", systemImage: "house", value: "Dashboard") {
                 DashboardView()
             }
             
-            Tab("Strategies", systemImage: "chart.pie") {
+            Tab("Strategies", systemImage: "chart.pie", value: "Strategies") {
                 StrategiesView()
             }
             
-            Tab("Pools", systemImage: "cube") {
+            Tab("Pools", systemImage: "cube", value: "Pools") {
                 PoolsView()
             }
             
-            Tab("Profile", systemImage: "person") {
+            Tab("Profile", systemImage: "person", value: "Profile") {
                 ProfileView()
             }
         }
