@@ -79,9 +79,10 @@ struct MarketOverviewGrid: View {
 
 #Preview {
     let mockRepo = MockDeFiRepository()
-    let viewModel = DashboardViewModel(repository: mockRepo)
+    let calculator = MetricsCalculator()
+    let viewModel = DashboardViewModel(repository: mockRepo, calculator: calculator)
     
-    return MarketOverviewGrid(viewModel: viewModel)
+    MarketOverviewGrid(viewModel: viewModel)
         .task {
             await viewModel.loadMetrics()
         }
