@@ -12,6 +12,8 @@ struct TVLChartView: View {
     @State private var viewModel = TVLChartViewModel()
     @State private var selectedDate: Date?
     @State private var selectedTVL: Int?
+    @State private var lastHapticDate: Date?
+    private let haptics = HapticsEngine.shared
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -29,6 +31,7 @@ struct TVLChartView: View {
         .background(chartBackground)
         .overlay(chartBorder)
         .task {
+            haptics.prepareHaptics()
             await viewModel.loadHistoricalTVL()
         }
     }
@@ -183,6 +186,7 @@ struct TVLChartView: View {
               date >= firstDate && date <= lastDate else {
             selectedTVL = nil
             selectedDate = nil
+            lastHapticDate = nil
             return
         }
         
@@ -192,6 +196,28 @@ struct TVLChartView: View {
         })
         
         selectedTVL = closestData?.tvl
+        
+        triggerHapticsForSelection(date: date, tvl: closestData?.tvl)
+    }
+    
+    private func triggerHapticsForSelection(date: Date?, tvl: Int?) {
+        guard let date = date, let tvl = tvl else { return }
+        
+            // haptics change interval
+        if let lastDate = lastHapticDate,
+           abs(date.timeIntervalSince(lastDate)) < 14400 { // 4 hours
+            return
+        }
+        
+        lastHapticDate = date
+        
+        haptics.lightTap()
+        
+        if tvl == viewModel.stats.min || tvl == viewModel.stats.max {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.haptics.milestone()
+            }
+        }
     }
     
     // MARK: - Skeleton
