@@ -25,7 +25,7 @@ enum MarketOverviewMetric: Identifiable {
     
     var title: String {
         switch self {
-        case .tvl: return "Total Market TVL"
+        case .tvl: return "Market TVL*"
         case .averageAPY: return "Average APY"
         case .topProtocol: return "Top Protocol"
         case .topChain: return "Top Chain"

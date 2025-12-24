@@ -11,20 +11,26 @@ struct MarketOverviewGrid: View {
     let viewModel: DashboardViewModel
     
     var body: some View {
-        VStack {
-            if viewModel.isLoadingMetrics {
-                skeletonContent
-            } else if let errorMessage = viewModel.metricsErrorMessage {
-                errorView(errorMessage)
-            } else if !viewModel.metrics.isEmpty {
-                metricsContent
+        VStack (spacing: 8) {
+            Text("Overview")
+                .font(.headline)
+                .foregroundStyle(.textPrimary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            VStack {
+                if viewModel.isLoadingMetrics {
+                    skeletonContent
+                } else if let errorMessage = viewModel.metricsErrorMessage {
+                    errorView(errorMessage)
+                } else if !viewModel.metrics.isEmpty {
+                    metricsContent
+                }
             }
         }
         .padding()
         .background(metricsBackground)
         .overlay(metricsBorder)
     }
-        
+    
     @ViewBuilder
     private var metricsContent: some View {
         ForEach(0..<(viewModel.metrics.count / 2), id: \.self) { rowIndex in

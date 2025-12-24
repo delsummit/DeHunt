@@ -14,16 +14,30 @@ struct DashboardView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    MarketOverviewGrid(viewModel: viewModel)
+                    VStack {
+                        MarketOverviewGrid(viewModel: viewModel)
+                        Text("*data includes only DeFi protocols")
+                            .font(.subheadline)
+                            .foregroundStyle(.textSecondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 12)
+                    }
                     
-                    TVLChartView(viewModel: viewModel)
+                    VStack {
+                        TVLChartView(viewModel: viewModel)
+                        Text("*excludes liquid staking and double counted TVL")
+                            .font(.subheadline)
+                            .foregroundStyle(.textSecondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 12)
+                    }
                 }
                 .padding()
                 .task {
                     await viewModel.loadDashboardData()
                 }
             }
-            .navigationTitle("Market overview")
+            .navigationTitle("Dashboard")
             .navigationBarTitleDisplayMode(.inline)
             .background(.backgroundPrimary)
         }

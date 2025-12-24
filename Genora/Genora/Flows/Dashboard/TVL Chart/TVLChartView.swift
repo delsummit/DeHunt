@@ -44,7 +44,7 @@ struct TVLChartView: View {
                 .foregroundStyle(.textPrimary)
             
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(displayedTVL.formatted(decimals: 2, currency: true))
+                Text("\(displayedTVL.formatted(decimals: 2, currency: true))*")
                     .font(.system(size: 28, weight: .bold))
                     .foregroundStyle(.textPrimary)
                     .contentTransition(.numericText())

@@ -11,7 +11,7 @@ struct MetricsCalculator {
     private let minTVL: Double
     private let excludedCategories: Set<String>
     
-    init(minTVL: Double = 10_000_000, excludedCategories: Set<String> = ["CEX", "Liquid Staking"]) {
+    init(minTVL: Double = 10_000_000, excludedCategories: Set<String> = ["CEX", "CeDeFi", "Liquid Staking", "Staking Pool", "Liquid Restaking", "Restaking", "Restaked BTC", "Staking Rental", "Chain", "Services", "Launchpad", "Gaming", "NFT Marketplace", "NFT Lending", "NFT Launchpad", "NftFi", "NFT Automated Strategies", "Meme", "Portfolio tracker", "Oracle", "Portfolio Tracker", "Wallets", "Telegram Bot", "Interface"]) {
         self.minTVL = minTVL
         self.excludedCategories = excludedCategories
     }
