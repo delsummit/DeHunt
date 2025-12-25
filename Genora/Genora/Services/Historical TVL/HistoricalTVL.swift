@@ -8,9 +8,7 @@
 import Foundation
 
 // MARK: - Model
-struct HistoricalTVL: Codable, Identifiable, APIEndpoint {
-    static var endpoint: String = "https://api.llama.fi/v2/historicalChainTvl"
-    
+struct HistoricalTVL: Codable, Identifiable {
     var id: String
     let date: Int
     let tvl: Int

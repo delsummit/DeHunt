@@ -13,14 +13,14 @@ protocol HistoricalTVLServiceProtocol {
 
 final class HistoricalTVLService: HistoricalTVLServiceProtocol {
     
-    private let apiService: APIService
+    private let apiService: APIServiceProtocol
     
-    init(apiService: APIService = .shared) {
+    init(apiService: APIServiceProtocol = APIService.shared) {
         self.apiService = apiService
     }
     
     func fetchHistoricalTVL() async throws -> [HistoricalTVLResponse] {
-        try await apiService.fetchChains(endpoint: HistoricalTVL.endpoint)
+        try await apiService.fetch(from: DefiLlamaEndpoint.historicalChainTVL.url)
     }
 }
 

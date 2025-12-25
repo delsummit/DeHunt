@@ -8,9 +8,7 @@
 import Foundation
 
 // MARK: - Models
-struct ProtocolsTVL: Codable, Identifiable, APIEndpoint {
-    static var endpoint: String = "https://api.llama.fi/protocols"
-    
+struct ProtocolsTVL: Codable, Identifiable {
     let id: String
     let name: String
     let symbol: String?

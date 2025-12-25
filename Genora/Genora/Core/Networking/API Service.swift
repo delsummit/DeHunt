@@ -7,15 +7,15 @@
 
 import Foundation
 
-protocol APIEndpoint {
-    static var endpoint: String { get }
+protocol APIServiceProtocol {
+    func fetch<T: Decodable>(from endpoint: String) async throws -> T
 }
 
-class APIService {
+final class APIService: APIServiceProtocol {
     static let shared = APIService()
     private init() { }
     
-    func fetchChains<T: Decodable>(endpoint: String) async throws -> T {
+    func fetch<T: Decodable>(from endpoint: String) async throws -> T {
         guard let url = URL(string: endpoint) else {
             throw LiamaAPIError.invalidURL
         }
@@ -35,10 +35,6 @@ class APIService {
         } catch {
             throw LiamaAPIError.invalidData
         }
-    }
-    
-    func fetch<T: Decodable & APIEndpoint>() async throws -> T {
-        return try await fetchChains(endpoint: T.endpoint)
     }
 }
 

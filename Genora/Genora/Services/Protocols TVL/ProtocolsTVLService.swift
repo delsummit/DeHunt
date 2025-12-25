@@ -13,14 +13,14 @@ protocol ProtocolsServiceProtocol {
 
 final class ProtocolsService: ProtocolsServiceProtocol {
     
-    private let apiService: APIService
+    private let apiService: APIServiceProtocol
     
-    init(apiService: APIService = .shared) {
+    init(apiService: APIServiceProtocol = APIService.shared) {
         self.apiService = apiService
     }
     
     func fetchProtocols() async throws -> [ProtocolsTVL] {
-        try await apiService.fetchChains(endpoint: ProtocolsTVL.endpoint)
+        try await apiService.fetch(from: DefiLlamaEndpoint.protocols.url)
     }
 }
 
