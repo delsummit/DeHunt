@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct StrategiesView: View {
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 20) {
+                    
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+            }
+            .navigationTitle("Strategies")
+            .navigationBarTitleDisplayMode(.inline)
+            .background(.backgroundPrimary)
+        }
     }
 }
 
