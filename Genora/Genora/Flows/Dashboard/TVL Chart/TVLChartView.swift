@@ -265,14 +265,7 @@ struct TVLChartView: View {
 }
 
 #Preview {
-    let mockAPIClient = MockDeFiAPIClient()
-    let calculator = MetricsCalculator()
-    let processor = HistoricalTVLProcessor()
-    let viewModel = DashboardViewModel(
-        apiClient: mockAPIClient,
-        calculator: calculator,
-        tvlProcessor: processor
-    )
+    let viewModel = DashboardViewModel()
     
     TVLChartView(viewModel: viewModel)
         .padding()

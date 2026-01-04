@@ -23,31 +23,3 @@ final class HistoricalTVLService: HistoricalTVLServiceProtocol {
         try await apiService.fetch(from: DefiLlamaEndpoint.historicalChainTVL.url)
     }
 }
-
-final class MockHistoricalTVLService: HistoricalTVLServiceProtocol {
-    
-    var shouldFail = false
-    var mockHistoricalData: [HistoricalTVL] = []
-    
-    func fetchHistoricalTVL() async throws -> [HistoricalTVL] {
-        if shouldFail {
-            throw LiamaAPIError.invalidData
-        }
-        
-        if mockHistoricalData.isEmpty {
-            return Self.sampleHistoricalData
-        }
-        
-        return mockHistoricalData
-    }
-    
-    static let sampleHistoricalData: [HistoricalTVL] = {
-        let now = Date()
-        return (0..<7).map { dayOffset in
-            let date = Calendar.current.date(byAdding: .day, value: -dayOffset, to: now)!
-            let timestamp = Int(date.timeIntervalSince1970)
-            let tvl = 50_000_000_000.0 + Double(dayOffset) * 1_000_000_000.0
-            return HistoricalTVL(date: timestamp, tvl: tvl)
-        }
-    }()
-}

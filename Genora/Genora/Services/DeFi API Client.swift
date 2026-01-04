@@ -38,27 +38,3 @@ final class DeFiAPIClient: DeFiAPIClientProtocol {
         try await tvl.fetchHistoricalTVL()
     }
 }
-
-// MARK: - Mock API Client
-
-final class MockDeFiAPIClient: DeFiAPIClientProtocol {
-    
-    let protocols: ProtocolsServiceProtocol
-    let tvl: HistoricalTVLServiceProtocol
-    
-    init(
-        protocols: ProtocolsServiceProtocol = MockProtocolsService(),
-        tvl: HistoricalTVLServiceProtocol = MockHistoricalTVLService()
-    ) {
-        self.protocols = protocols
-        self.tvl = tvl
-    }
-    
-    func fetchProtocols() async throws -> [ProtocolsTVL] {
-        try await protocols.fetchProtocols()
-    }
-    
-    func fetchHistoricalTVL() async throws -> [HistoricalTVL] {
-        try await tvl.fetchHistoricalTVL()
-    }
-}
