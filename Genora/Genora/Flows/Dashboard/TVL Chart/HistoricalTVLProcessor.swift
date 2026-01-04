@@ -9,20 +9,13 @@ import Foundation
 
 struct HistoricalTVLProcessor {
     
-    func process(_ rawData: [HistoricalTVLResponse], days: Int = 7) -> [HistoricalTVL] {
+    func process(_ rawData: [HistoricalTVL], days: Int = 7) -> [HistoricalTVL] {
         let cutoffDate = Calendar.current.date(byAdding: .day, value: -days, to: Date()) ?? Date()
         
         let filteredData = rawData
             .filter { item in
                 let itemDate = Date(timeIntervalSince1970: TimeInterval(item.date))
                 return itemDate >= cutoffDate
-            }
-            .map { item in
-                HistoricalTVL(
-                    id: "\(item.date)",
-                    date: item.date,
-                    tvl: Int(item.tvl)
-                )
             }
             .sorted { $0.date < $1.date }
         
@@ -48,15 +41,14 @@ struct HistoricalTVLProcessor {
             
             let pointsBetween = targetPoints / data.count
             let timeDiff = next.date - current.date
-            let tvlDiff = Double(next.tvl - current.tvl)
+            let tvlDiff = next.tvl - current.tvl
             
             for j in 1..<pointsBetween {
                 let ratio = Double(j) / Double(pointsBetween)
                 let interpolatedDate = current.date + Int(Double(timeDiff) * ratio)
-                let interpolatedTVL = current.tvl + Int(tvlDiff * ratio)
+                let interpolatedTVL = current.tvl + (tvlDiff * ratio)
                 
                 result.append(HistoricalTVL(
-                    id: "\(interpolatedDate)",
                     date: interpolatedDate,
                     tvl: interpolatedTVL
                 ))
@@ -94,15 +86,15 @@ struct HistoricalTVLProcessor {
         }
         
         let last = data.last?.tvl ?? 0
-        return ((Double(last) - Double(first)) / Double(first)) * 100
+        return ((last - first) / first) * 100
     }
 }
 
 // MARK: - Stats Model
 
 struct TVLStats {
-    let min: Int
-    let max: Int
-    let current: Int
+    let min: Double
+    let max: Double
+    let current: Double
     let change: Double
 }

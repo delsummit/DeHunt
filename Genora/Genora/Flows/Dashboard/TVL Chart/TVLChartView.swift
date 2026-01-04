@@ -11,7 +11,7 @@ import Charts
 struct TVLChartView: View {
     let viewModel: DashboardViewModel
     @State private var selectedDate: Date?
-    @State private var selectedTVL: Int?
+    @State private var selectedTVL: Double?
     @State private var lastHapticDate: Date?
     private let haptics = HapticsEngine.shared
     
@@ -68,7 +68,7 @@ struct TVLChartView: View {
         return viewModel.historicalData.last?.dateValue
     }
     
-    private var displayedTVL: Int {
+    private var displayedTVL: Double {
         selectedTVL ?? viewModel.tvlStats.current
     }
     
@@ -89,7 +89,7 @@ struct TVLChartView: View {
         viewModel.tvlStats.change >= 0 ? .accentPrimary : .accentRed
     }
     
-    private var yAxisDomain: ClosedRange<Int> {
+    private var yAxisDomain: ClosedRange<Double> {
         guard !viewModel.historicalData.isEmpty else {
             return 0...100
         }
@@ -98,7 +98,7 @@ struct TVLChartView: View {
         let maxValue = viewModel.tvlStats.max
         let range = maxValue - minValue
         
-        let padding = max(Int(Double(range) * 0.1), 1)
+        let padding = max(range * 0.1, 1)
         
         return (minValue - padding)...(maxValue + padding)
     }
@@ -162,7 +162,7 @@ struct TVLChartView: View {
                     .foregroundStyle(.textSecondary.opacity(0.2))
                 
                 AxisValueLabel {
-                    if let tvl = value.as(Int.self) {
+                    if let tvl = value.as(Double.self) {
                         Text(tvl.formatted(decimals: 0))
                             .font(.caption2)
                             .foregroundStyle(.textSecondary)
@@ -206,7 +206,7 @@ struct TVLChartView: View {
         triggerHapticsForSelection(date: date, tvl: closestData?.tvl)
     }
     
-    private func triggerHapticsForSelection(date: Date?, tvl: Int?) {
+    private func triggerHapticsForSelection(date: Date?, tvl: Double?) {
         guard let date = date, let tvl = tvl else { return }
         
             // haptics change interval

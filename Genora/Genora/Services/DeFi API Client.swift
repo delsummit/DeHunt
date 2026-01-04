@@ -13,7 +13,7 @@ protocol DeFiAPIClientProtocol {
     var tvl: HistoricalTVLServiceProtocol { get }
     
     func fetchProtocols() async throws -> [ProtocolsTVL]
-    func fetchHistoricalTVL() async throws -> [HistoricalTVLResponse]
+    func fetchHistoricalTVL() async throws -> [HistoricalTVL]
 }
 
 // MARK: - API Client
@@ -34,7 +34,7 @@ final class DeFiAPIClient: DeFiAPIClientProtocol {
         try await protocols.fetchProtocols()
     }
     
-    func fetchHistoricalTVL() async throws -> [HistoricalTVLResponse] {
+    func fetchHistoricalTVL() async throws -> [HistoricalTVL] {
         try await tvl.fetchHistoricalTVL()
     }
 }
@@ -58,7 +58,7 @@ final class MockDeFiAPIClient: DeFiAPIClientProtocol {
         try await protocols.fetchProtocols()
     }
     
-    func fetchHistoricalTVL() async throws -> [HistoricalTVLResponse] {
+    func fetchHistoricalTVL() async throws -> [HistoricalTVL] {
         try await tvl.fetchHistoricalTVL()
     }
 }

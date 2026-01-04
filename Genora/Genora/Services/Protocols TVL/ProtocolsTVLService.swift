@@ -41,28 +41,39 @@ final class MockProtocolsService: ProtocolsServiceProtocol {
         return mockProtocols
     }
     
-    static let sampleProtocols: [ProtocolsTVL] = [
-        ProtocolsTVL(
-            id: "1",
-            name: "Aave",
-            symbol: "AAVE",
-            category: "Lending",
-            chains: ["Ethereum", "Polygon"],
-            tvl: 5_000_000_000,
-            chainTvls: ["Ethereum": 4_000_000_000, "Polygon": 1_000_000_000],
-            change_1d: 2.5,
-            change_7d: 5.2
-        ),
-        ProtocolsTVL(
-            id: "2",
-            name: "Uniswap",
-            symbol: "UNI",
-            category: "Dexes",
-            chains: ["Ethereum"],
-            tvl: 3_500_000_000,
-            chainTvls: ["Ethereum": 3_500_000_000],
-            change_1d: -1.2,
-            change_7d: 3.4
-        )
-    ]
+    static let sampleProtocols: [ProtocolsTVL] = {
+        let json = """
+        [
+            {
+                "id": "1",
+                "name": "Aave",
+                "symbol": "AAVE",
+                "category": "Lending",
+                "chains": ["Ethereum", "Polygon"],
+                "tvl": 5000000000,
+                "chainTvls": {"Ethereum": 4000000000, "Polygon": 1000000000},
+                "change_1d": 2.5,
+                "change_7d": 5.2
+            },
+            {
+                "id": "2",
+                "name": "Uniswap",
+                "symbol": "UNI",
+                "category": "Dexes",
+                "chains": ["Ethereum"],
+                "tvl": 3500000000,
+                "chainTvls": {"Ethereum": 3500000000},
+                "change_1d": -1.2,
+                "change_7d": 3.4
+            }
+        ]
+        """
+        
+        guard let data = json.data(using: .utf8),
+              let protocols = try? JSONDecoder().decode([ProtocolsTVL].self, from: data) else {
+            return []
+        }
+        
+        return protocols
+    }()
 }

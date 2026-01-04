@@ -9,23 +9,11 @@ import Foundation
 
 // MARK: - Model
 struct HistoricalTVL: Codable, Identifiable {
-    var id: String
+    var id: Int { date }
     let date: Int
-    let tvl: Int
+    let tvl: Double
     
     var dateValue: Date {
         Date(timeIntervalSince1970: TimeInterval(date))
     }
-    
-    init(id: String, date: Int, tvl: Int) {
-        self.id = id
-        self.date = date
-        self.tvl = tvl
-    }
-}
-
-// MARK: - API Response Model
-struct HistoricalTVLResponse: Codable {
-    let date: Int
-    let tvl: Double
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol HistoricalTVLServiceProtocol {
-    func fetchHistoricalTVL() async throws -> [HistoricalTVLResponse]
+    func fetchHistoricalTVL() async throws -> [HistoricalTVL]
 }
 
 final class HistoricalTVLService: HistoricalTVLServiceProtocol {
@@ -19,7 +19,7 @@ final class HistoricalTVLService: HistoricalTVLServiceProtocol {
         self.apiService = apiService
     }
     
-    func fetchHistoricalTVL() async throws -> [HistoricalTVLResponse] {
+    func fetchHistoricalTVL() async throws -> [HistoricalTVL] {
         try await apiService.fetch(from: DefiLlamaEndpoint.historicalChainTVL.url)
     }
 }
@@ -27,9 +27,9 @@ final class HistoricalTVLService: HistoricalTVLServiceProtocol {
 final class MockHistoricalTVLService: HistoricalTVLServiceProtocol {
     
     var shouldFail = false
-    var mockHistoricalData: [HistoricalTVLResponse] = []
+    var mockHistoricalData: [HistoricalTVL] = []
     
-    func fetchHistoricalTVL() async throws -> [HistoricalTVLResponse] {
+    func fetchHistoricalTVL() async throws -> [HistoricalTVL] {
         if shouldFail {
             throw LiamaAPIError.invalidData
         }
@@ -41,13 +41,13 @@ final class MockHistoricalTVLService: HistoricalTVLServiceProtocol {
         return mockHistoricalData
     }
     
-    static let sampleHistoricalData: [HistoricalTVLResponse] = {
+    static let sampleHistoricalData: [HistoricalTVL] = {
         let now = Date()
         return (0..<7).map { dayOffset in
             let date = Calendar.current.date(byAdding: .day, value: -dayOffset, to: now)!
             let timestamp = Int(date.timeIntervalSince1970)
             let tvl = 50_000_000_000.0 + Double(dayOffset) * 1_000_000_000.0
-            return HistoricalTVLResponse(date: timestamp, tvl: tvl)
+            return HistoricalTVL(date: timestamp, tvl: tvl)
         }
     }()
 }
