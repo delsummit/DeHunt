@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StrategiesView: View {
+    @State private var selectedChains: Set<YieldPool> = []
     
     var body: some View {
         NavigationStack {
@@ -18,7 +19,7 @@ struct StrategiesView: View {
                     Divider()
                         .frame(height: 20)
                     
-                    StrategiesSelectedChainsView()
+                    StrategiesSelectedChainsView(selection: $selectedChains)
                 }
                 .padding()
                 .background(

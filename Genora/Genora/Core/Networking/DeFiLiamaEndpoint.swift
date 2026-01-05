@@ -10,14 +10,14 @@ import Foundation
 enum DefiLlamaEndpoint {
     case protocols
     case historicalChainTVL
-    case pools
+    case yieldPools
     
     private static let apiBaseURL = "https://api.llama.fi"
     private static let yieldsBaseURL = "https://yields.llama.fi"
     
     var baseURL: String {
         switch self {
-        case .pools:
+        case .yieldPools:
             return Self.yieldsBaseURL
         case .protocols, .historicalChainTVL:
             return Self.apiBaseURL
@@ -30,7 +30,7 @@ enum DefiLlamaEndpoint {
             return "/protocols"
         case .historicalChainTVL:
             return "/v2/historicalChainTvl"
-        case .pools:
+        case .yieldPools:
             return "/pools"
         }
     }

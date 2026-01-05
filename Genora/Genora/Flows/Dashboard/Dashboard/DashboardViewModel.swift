@@ -27,12 +27,12 @@ final class DashboardViewModel {
     
     // MARK: - Dependencies
     private let apiClient: DeFiAPIClientProtocol
-    private let calculator: MetricsCalculator
+    private let calculator: MarketOverviewMetricsCalculator
     private let tvlProcessor: HistoricalTVLProcessor
     
     init(
         apiClient: DeFiAPIClientProtocol,
-        calculator: MetricsCalculator,
+        calculator: MarketOverviewMetricsCalculator,
         tvlProcessor: HistoricalTVLProcessor
     ) {
         self.apiClient = apiClient
@@ -43,7 +43,7 @@ final class DashboardViewModel {
     convenience init() {
         self.init(
             apiClient: DeFiAPIClient(),
-            calculator: MetricsCalculator(),
+            calculator: MarketOverviewMetricsCalculator(),
             tvlProcessor: HistoricalTVLProcessor()
         )
     }

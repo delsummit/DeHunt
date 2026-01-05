@@ -1,5 +1,5 @@
 //
-//  MetricsCalculator.swift
+//  MarketOverviewMetricsCalculator.swift
 //  Genora
 //
 //  Created by Rostyslav Mukoida on 21/12/2025.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MetricsCalculator {
+struct MarketOverviewMetricsCalculator {
     private let minTVL: Double
     private let excludedCategories: Set<String>
     

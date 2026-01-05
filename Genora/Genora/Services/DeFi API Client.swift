@@ -11,9 +11,11 @@ import Foundation
 protocol DeFiAPIClientProtocol {
     var protocols: ProtocolsServiceProtocol { get }
     var tvl: HistoricalTVLServiceProtocol { get }
+    var yieldPools: YieldPoolServiceProtocol { get }
     
     func fetchProtocols() async throws -> [ProtocolsTVL]
     func fetchHistoricalTVL() async throws -> [HistoricalTVL]
+    func fetchYieldPools() async throws -> [YieldPool]
 }
 
 // MARK: - API Client
@@ -21,13 +23,16 @@ final class DeFiAPIClient: DeFiAPIClientProtocol {
     
     let protocols: ProtocolsServiceProtocol
     let tvl: HistoricalTVLServiceProtocol
+    let yieldPools: YieldPoolServiceProtocol
     
     init(
         protocols: ProtocolsServiceProtocol = ProtocolsService(),
-        tvl: HistoricalTVLServiceProtocol = HistoricalTVLService()
+        tvl: HistoricalTVLServiceProtocol = HistoricalTVLService(),
+        yieldPools: YieldPoolServiceProtocol = YieldPoolService()
     ) {
         self.protocols = protocols
         self.tvl = tvl
+        self.yieldPools = yieldPools
     }
     
     func fetchProtocols() async throws -> [ProtocolsTVL] {
@@ -36,5 +41,9 @@ final class DeFiAPIClient: DeFiAPIClientProtocol {
     
     func fetchHistoricalTVL() async throws -> [HistoricalTVL] {
         try await tvl.fetchHistoricalTVL()
+    }
+    
+    func fetchYieldPools() async throws -> [YieldPool] {
+        try await yieldPools.fetchYieldPools()
     }
 }
