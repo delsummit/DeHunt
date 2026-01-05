@@ -20,6 +20,7 @@ final class YieldPoolService: YieldPoolServiceProtocol {
     }
     
     func fetchYieldPools() async throws -> [YieldPool] {
-        try await apiService.fetch(from: DefiLlamaEndpoint.yieldPools.url)
+        let response: YieldPoolResponse = try await apiService.fetch(from: DefiLlamaEndpoint.yieldPools.url)
+        return response.data
     }
 }

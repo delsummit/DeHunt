@@ -8,8 +8,8 @@
 import Foundation
 
 struct YieldPoolResponse: Decodable {
-    var response: String
-    var data: [YieldPool]
+    let status: String
+    let data: [YieldPool]
 }
 
 struct YieldPool: Decodable, Identifiable, Hashable {

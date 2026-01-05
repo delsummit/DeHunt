@@ -29,7 +29,9 @@ struct StrategiesSelectedChainsView: View {
             .glassEffect()
             
             Button(action: {
-                viewModel.pingModel()
+                Task {
+                    await viewModel.loadYieldPools()
+                }
             }) {
                 Image(systemName: "square.and.pencil")
                     .frame(width: 40)
