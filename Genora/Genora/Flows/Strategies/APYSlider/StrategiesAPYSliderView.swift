@@ -23,12 +23,11 @@ struct StrategiesAPYSliderView: View {
                 ZStack(alignment: .bottom) {
                     GeometryReader { _ in
                         HStack(spacing: 0) {
-                            ForEach(0..<19) { index in
-                                let value = 10 + (index * 5)
+                            ForEach(0..<21) { index in
                                 Rectangle()
                                     .fill(.secondary.opacity(0.3))
-                                    .frame(width: 1, height: value % 10 == 0 ? 8 : 4)
-                                if index < 18 {
+                                    .frame(width: 1, height: index % 5 == 0 ? 8 : 4)
+                                if index < 20 {
                                     Spacer()
                                 }
                             }
@@ -37,7 +36,7 @@ struct StrategiesAPYSliderView: View {
                     .frame(height: 8)
                     .padding(.bottom, 4)
                     
-                    Slider(value: $viewModel.minimumAPY, in: 10...100, step: 0.5)
+                    Slider(value: $viewModel.minimumAPY, in: 0...100, step: 0.5)
                         .tint(.element)
                         .onChange(of: viewModel.minimumAPY) { oldValue, newValue in
                             let oldMilestone = Int(oldValue)
@@ -53,7 +52,7 @@ struct StrategiesAPYSliderView: View {
             .glassEffect(.regular, in: .rect(cornerRadius: 24))
             
             HStack(spacing: 4) {
-                TextField("10", value: $viewModel.minimumAPY, format: .number.precision(.fractionLength(1)))
+                TextField("0", value: $viewModel.minimumAPY, format: .number.precision(.fractionLength(1)))
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundStyle(.element)
@@ -63,7 +62,7 @@ struct StrategiesAPYSliderView: View {
                     .minimumScaleFactor(0.5)
                     .focused($isKeyboardVisible)
                     .onChange(of: viewModel.minimumAPY) { oldValue, newValue in
-                        viewModel.minimumAPY = min(max(newValue, 10), 100)
+                        viewModel.minimumAPY = min(max(newValue, 0), 100)
                     }
                 
                 Text("%")

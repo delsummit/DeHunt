@@ -91,7 +91,7 @@ final class StrategiesViewModel {
     }
     
     func filterPoolsByAPY(_ pools: [YieldPool]) -> [YieldPool] {
-        guard minimumAPY > 10 else {
+        guard minimumAPY > 0 else {
             return pools
         }
         
