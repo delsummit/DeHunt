@@ -9,7 +9,14 @@ import SwiftUI
 
 struct StrategiesView: View {
     @State private var viewModel = StrategiesViewModel()
-    @FocusState private var isKeyboardVisible: Bool
+    
+    enum FocusedField {
+        case investmentAmount
+        case minTVL
+        case minimumAPY
+    }
+    
+    @FocusState private var focusedField: FocusedField?
     
     var body: some View {
         NavigationStack {
@@ -22,10 +29,10 @@ struct StrategiesView: View {
             .navigationTitle("Strategies")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                if isKeyboardVisible {
+                if focusedField != nil {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button("Done") {
-                            isKeyboardVisible = false
+                            focusedField = nil
                         }
                         .foregroundStyle(.element)
                         .fontWeight(.semibold)
@@ -33,7 +40,7 @@ struct StrategiesView: View {
                 }
             }
             .onTapGesture {
-                isKeyboardVisible = false
+                focusedField = nil
             }
             .onAppear {
                 HapticsEngine.shared.prepareHaptics()
@@ -44,12 +51,12 @@ struct StrategiesView: View {
     @ViewBuilder
     private var content: some View {
         VStack {
-            StrategiesUserInputMoneyView(viewModel: viewModel, isKeyboardVisible: $isKeyboardVisible)
+            StrategiesUserInputMoneyView(viewModel: viewModel, focusedField: $focusedField)
             
             Divider()
                 .frame(height: 20)
             
-            StrategiesMinTVLView(viewModel: viewModel, isKeyboardVisible: $isKeyboardVisible)
+            StrategiesMinTVLView(viewModel: viewModel, focusedField: $focusedField)
             
             Divider()
                 .frame(height: 20)
@@ -59,7 +66,7 @@ struct StrategiesView: View {
             Divider()
                 .frame(height: 20)
             
-            StrategiesAPYSliderView(viewModel: viewModel, isKeyboardVisible: $isKeyboardVisible)
+            StrategiesAPYSliderView(viewModel: viewModel, focusedField: $focusedField)
         }
         .padding()
         .background(

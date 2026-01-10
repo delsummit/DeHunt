@@ -9,11 +9,15 @@ import SwiftUI
 
 struct StrategiesUserInputMoneyView: View {
     @Bindable var viewModel: StrategiesViewModel
-    @FocusState.Binding var isKeyboardVisible: Bool
+    @FocusState.Binding var focusedField: StrategiesView.FocusedField?
+    @State private var textInput: String = ""
     
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
+        formatter.groupingSeparator = " "
+        formatter.usesGroupingSeparator = true
+        formatter.maximumFractionDigits = 2
         return formatter
     }()
     
@@ -35,24 +39,50 @@ struct StrategiesUserInputMoneyView: View {
                 Divider()
                 
                 HStack(spacing: 4) {
-                    if viewModel.investmentAmount != nil {
+                    if !textInput.isEmpty {
                         Text("$")
                             .foregroundStyle(.textSecondary)
                             .font(.body)
                     }
                     
-                    TextField("Enter the value", value: $viewModel.investmentAmount, formatter: formatter)
+                    TextField("Enter the value", text: Binding(
+                        get: { textInput },
+                        set: { newValue in
+                            if focusedField == .investmentAmount {
+                                let filtered = newValue.filter { "0123456789.,".contains($0) }
+                                textInput = filtered
+                                
+                                let normalizedInput = filtered.replacingOccurrences(of: ",", with: ".")
+                                viewModel.investmentAmount = Double(normalizedInput)
+                            } else {
+                                textInput = newValue
+                            }
+                        }
+                    ))
                         .textFieldStyle(.plain)
                         .keyboardType(.decimalPad)
-                        .focused($isKeyboardVisible)
+                        .focused($focusedField, equals: .investmentAmount)
                         .foregroundStyle(.textSecondary)
+                        .onChange(of: focusedField) { _, newField in
+                            if newField == .investmentAmount {
+                                unfocusedToFocused()
+                            } else if newField != .investmentAmount {
+                                focusedToUnfocused()
+                            }
+                        }
+                        .onAppear {
+                            if let amount = viewModel.investmentAmount {
+                                textInput = formatter.string(from: NSNumber(value: amount)) ?? ""
+                            }
+                        }
                 }
                 
                 
-                if viewModel.investmentAmount != nil {
+                if !textInput.isEmpty {
                     Button {
                         viewModel.investmentAmount = nil
-                        isKeyboardVisible = false
+                        textInput = ""
+                        focusedField = nil
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundStyle(.textSecondary)
@@ -63,6 +93,29 @@ struct StrategiesUserInputMoneyView: View {
             }
             .padding()
             .glassEffect(.regular, in: .rect(cornerRadius: 16))
+        }
+    }
+    
+    // MARK: - Helper Methods
+    private func unfocusedToFocused() {
+        guard let amount = viewModel.investmentAmount else { return }
+        
+        let cleanText = String(amount)
+        if cleanText.hasSuffix(".0") {
+            textInput = String(cleanText.dropLast(2))
+        } else {
+            textInput = cleanText
+        }
+    }
+    
+    private func focusedToUnfocused() {
+        guard let amount = viewModel.investmentAmount else {
+            textInput = ""
+            return
+        }
+        
+        if let formatted = formatter.string(from: NSNumber(value: amount)) {
+            textInput = formatted
         }
     }
 }

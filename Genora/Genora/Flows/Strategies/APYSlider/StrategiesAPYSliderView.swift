@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StrategiesAPYSliderView: View {
     @Bindable var viewModel: StrategiesViewModel
-    @FocusState.Binding var isKeyboardVisible: Bool
+    @FocusState.Binding var focusedField: StrategiesView.FocusedField?
     
     var body: some View {
         Text("Minimum APY")
@@ -59,7 +59,7 @@ struct StrategiesAPYSliderView: View {
                     .keyboardType(.decimalPad)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
-                    .focused($isKeyboardVisible)
+                    .focused($focusedField, equals: .minimumAPY)
                     .onChange(of: viewModel.minimumAPY) { oldValue, newValue in
                         viewModel.minimumAPY = min(max(newValue, 0), 100)
                     }
