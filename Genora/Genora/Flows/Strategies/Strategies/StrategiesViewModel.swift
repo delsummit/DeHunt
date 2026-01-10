@@ -13,8 +13,21 @@ final class StrategiesViewModel {
     // MARK: - Properties
     var selectedChains: Set<BlockchainChain> = []
     var investmentAmount: Double? = nil
+    var minTVLValue: Double? = nil
     var minimumAPY: Double = 10.0
     var isChainSelectionPresented = false
+    
+    var pools: [YieldPool] = []
+    var filteredPools: [YieldPool] = []
+    var isLoading = false
+    var errorMessage: String?
+    
+    private let apiClient: DeFiAPIClientProtocol
+    
+    // MARK: - Initialization
+    init(apiClient: DeFiAPIClientProtocol = DeFiAPIClient()) {
+        self.apiClient = apiClient
+    }
     
     var selectedChainsArray: [BlockchainChain] {
         BlockchainChain.allCases
@@ -40,6 +53,11 @@ final class StrategiesViewModel {
         investmentAmount
     }
     
+    var validTVLValue: Double? {
+        minTVLValue
+    }
+
+    
     // MARK: - Actions
 
     func toggleChain(_ chain: BlockchainChain) {
@@ -62,14 +80,24 @@ final class StrategiesViewModel {
         investmentAmount = amount
     }
     
+    func setMinTVLAmount(_ value: Double?) {
+        minTVLValue = value
+    }
+    
     func isChainSelected(_ chain: BlockchainChain) -> Bool {
         selectedChains.contains(chain)
     }
     
     // MARK: - Filters
     func filterPools(_ pools: [YieldPool]) -> [YieldPool] {
+        let supportedChains = Set(
+            BlockchainChain.allCases.flatMap { $0.apiChainNames }
+        )
+        
         guard hasSelectedChains else {
-            return pools
+            return pools.filter { pool in
+                supportedChains.contains(pool.chain)
+            }
         }
         
         return pools.filter { pool in
@@ -79,21 +107,17 @@ final class StrategiesViewModel {
         }
     }
     
-    func filterPoolsByInvestment(_ pools: [YieldPool]) -> [YieldPool] {
-        guard let amount = validInvestmentAmount else {
+    func filterPoolsByTVL(_ pools: [YieldPool]) -> [YieldPool] {
+        guard let value = validTVLValue else {
             return pools
         }
         
         return pools.filter { pool in
-            pool.tvlUsd >= amount
+            pool.tvlUsd >= value
         }
     }
     
     func filterPoolsByAPY(_ pools: [YieldPool]) -> [YieldPool] {
-        guard minimumAPY > 0 else {
-            return pools
-        }
-        
         return pools.filter { pool in
             pool.apy >= minimumAPY
         }
@@ -101,8 +125,24 @@ final class StrategiesViewModel {
     
     func applyAllFilters(_ pools: [YieldPool]) -> [YieldPool] {
         let chainFiltered = filterPools(pools)
-        let investmentFiltered = filterPoolsByInvestment(chainFiltered)
-        let apyFiltered = filterPoolsByAPY(investmentFiltered)
+        let tvlFiltered = filterPoolsByTVL(chainFiltered)
+        let apyFiltered = filterPoolsByAPY(tvlFiltered)
         return apyFiltered
+    }
+    
+    func performSearch() async {
+        isLoading = true
+        errorMessage = nil
+        
+        do {
+            pools = try await apiClient.fetchYieldPools()
+            filteredPools = applyAllFilters(pools)
+        } catch {
+            errorMessage = "\(error.localizedDescription)"
+            pools = []
+            filteredPools = []
+        }
+        
+        isLoading = false
     }
 }

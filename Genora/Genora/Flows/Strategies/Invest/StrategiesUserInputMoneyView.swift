@@ -52,6 +52,7 @@ struct StrategiesUserInputMoneyView: View {
                 if viewModel.investmentAmount != nil {
                     Button {
                         viewModel.investmentAmount = nil
+                        isKeyboardVisible = false
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundStyle(.textSecondary)

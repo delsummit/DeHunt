@@ -10,7 +10,7 @@ import SwiftUI
 struct StrategiesMinTVLView: View {
     @Bindable var viewModel: StrategiesViewModel
     @FocusState.Binding var isKeyboardVisible: Bool
-    @State private var tester: Int? = 0
+    @State private var tester: Double?
     
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -49,6 +49,7 @@ struct StrategiesMinTVLView: View {
                 if tester != nil {
                     Button {
                         tester = nil
+                        isKeyboardVisible = false
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundStyle(.textSecondary)
