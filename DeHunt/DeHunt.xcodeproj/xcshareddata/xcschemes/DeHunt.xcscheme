@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "63D6BE4B2EEF2D84005D6163"
-               BuildableName = "Genora.app"
-               BlueprintName = "Genora"
-               ReferencedContainer = "container:Genora.xcodeproj">
+               BuildableName = "DeHunt.app"
+               BlueprintName = "DeHunt"
+               ReferencedContainer = "container:DeHunt.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "63D6BE4B2EEF2D84005D6163"
-            BuildableName = "Genora.app"
-            BlueprintName = "Genora"
-            ReferencedContainer = "container:Genora.xcodeproj">
+            BuildableName = "DeHunt.app"
+            BlueprintName = "DeHunt"
+            ReferencedContainer = "container:DeHunt.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "63D6BE4B2EEF2D84005D6163"
-            BuildableName = "Genora.app"
-            BlueprintName = "Genora"
-            ReferencedContainer = "container:Genora.xcodeproj">
+            BuildableName = "DeHunt.app"
+            BlueprintName = "DeHunt"
+            ReferencedContainer = "container:DeHunt.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		63D6BE4C2EEF2D84005D6163 /* Genora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genora.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		63D6BE4C2EEF2D84005D6163 /* DeHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		63D6BE4E2EEF2D84005D6163 /* Genora */ = {
+		63D6BE4E2EEF2D84005D6163 /* DeHunt */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Genora;
+			path = DeHunt;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		63D6BE432EEF2D84005D6163 = {
 			isa = PBXGroup;
 			children = (
-				63D6BE4E2EEF2D84005D6163 /* Genora */,
+				63D6BE4E2EEF2D84005D6163 /* DeHunt */,
 				63D6BE4D2EEF2D84005D6163 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		63D6BE4D2EEF2D84005D6163 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				63D6BE4C2EEF2D84005D6163 /* Genora.app */,
+				63D6BE4C2EEF2D84005D6163 /* DeHunt.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		63D6BE4B2EEF2D84005D6163 /* Genora */ = {
+		63D6BE4B2EEF2D84005D6163 /* DeHunt */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 63D6BE572EEF2D86005D6163 /* Build configuration list for PBXNativeTarget "Genora" */;
+			buildConfigurationList = 63D6BE572EEF2D86005D6163 /* Build configuration list for PBXNativeTarget "DeHunt" */;
 			buildPhases = (
 				63D6BE482EEF2D84005D6163 /* Sources */,
 				63D6BE492EEF2D84005D6163 /* Frameworks */,
@@ -61,13 +61,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				63D6BE4E2EEF2D84005D6163 /* Genora */,
+				63D6BE4E2EEF2D84005D6163 /* DeHunt */,
 			);
-			name = Genora;
+			name = DeHunt;
 			packageProductDependencies = (
 			);
 			productName = Genora;
-			productReference = 63D6BE4C2EEF2D84005D6163 /* Genora.app */;
+			productReference = 63D6BE4C2EEF2D84005D6163 /* DeHunt.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 63D6BE472EEF2D84005D6163 /* Build configuration list for PBXProject "Genora" */;
+			buildConfigurationList = 63D6BE472EEF2D84005D6163 /* Build configuration list for PBXProject "DeHunt" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				63D6BE4B2EEF2D84005D6163 /* Genora */,
+				63D6BE4B2EEF2D84005D6163 /* DeHunt */,
 			);
 		};
 /* End PBXProject section */
@@ -269,7 +269,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = summit.Genora;
+				PRODUCT_BUNDLE_IDENTIFIER = summit.DeHunt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -302,7 +302,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = summit.Genora;
+				PRODUCT_BUNDLE_IDENTIFIER = summit.DeHunt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -317,7 +317,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		63D6BE472EEF2D84005D6163 /* Build configuration list for PBXProject "Genora" */ = {
+		63D6BE472EEF2D84005D6163 /* Build configuration list for PBXProject "DeHunt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				63D6BE552EEF2D86005D6163 /* Debug */,
@@ -326,7 +326,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		63D6BE572EEF2D86005D6163 /* Build configuration list for PBXNativeTarget "Genora" */ = {
+		63D6BE572EEF2D86005D6163 /* Build configuration list for PBXNativeTarget "DeHunt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				63D6BE582EEF2D86005D6163 /* Debug */,
