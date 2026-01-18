@@ -6,11 +6,27 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		6327A5AF2F1D60DE00F358C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63D6BE442EEF2D84005D6163 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 63D6BE4B2EEF2D84005D6163;
+			remoteInfo = DeHunt;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		6327A5AB2F1D60DE00F358C8 /* DeHuntTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeHuntTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63D6BE4C2EEF2D84005D6163 /* DeHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6327A5AC2F1D60DE00F358C8 /* DeHuntTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = DeHuntTests;
+			sourceTree = "<group>";
+		};
 		63D6BE4E2EEF2D84005D6163 /* DeHunt */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = DeHunt;
@@ -19,6 +35,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6327A5A82F1D60DE00F358C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63D6BE492EEF2D84005D6163 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				63D6BE4E2EEF2D84005D6163 /* DeHunt */,
+				6327A5AC2F1D60DE00F358C8 /* DeHuntTests */,
 				63D6BE4D2EEF2D84005D6163 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				63D6BE4C2EEF2D84005D6163 /* DeHunt.app */,
+				6327A5AB2F1D60DE00F358C8 /* DeHuntTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +73,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6327A5AA2F1D60DE00F358C8 /* DeHuntTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6327A5B12F1D60DE00F358C8 /* Build configuration list for PBXNativeTarget "DeHuntTests" */;
+			buildPhases = (
+				6327A5A72F1D60DE00F358C8 /* Sources */,
+				6327A5A82F1D60DE00F358C8 /* Frameworks */,
+				6327A5A92F1D60DE00F358C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6327A5B02F1D60DE00F358C8 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				6327A5AC2F1D60DE00F358C8 /* DeHuntTests */,
+			);
+			name = DeHuntTests;
+			packageProductDependencies = (
+			);
+			productName = DeHuntTests;
+			productReference = 6327A5AB2F1D60DE00F358C8 /* DeHuntTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		63D6BE4B2EEF2D84005D6163 /* DeHunt */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63D6BE572EEF2D86005D6163 /* Build configuration list for PBXNativeTarget "DeHunt" */;
@@ -77,9 +125,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2610;
+				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 2620;
 				TargetAttributes = {
+					6327A5AA2F1D60DE00F358C8 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 63D6BE4B2EEF2D84005D6163;
+					};
 					63D6BE4B2EEF2D84005D6163 = {
 						CreatedOnToolsVersion = 26.1.1;
 					};
@@ -100,11 +152,19 @@
 			projectRoot = "";
 			targets = (
 				63D6BE4B2EEF2D84005D6163 /* DeHunt */,
+				6327A5AA2F1D60DE00F358C8 /* DeHuntTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6327A5A92F1D60DE00F358C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63D6BE4A2EEF2D84005D6163 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +175,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6327A5A72F1D60DE00F358C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63D6BE482EEF2D84005D6163 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +191,59 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6327A5B02F1D60DE00F358C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 63D6BE4B2EEF2D84005D6163 /* DeHunt */;
+			targetProxy = 6327A5AF2F1D60DE00F358C8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		6327A5B22F1D60DE00F358C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4QHZ94TSC9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = summit.DeHuntTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeHunt.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DeHunt";
+			};
+			name = Debug;
+		};
+		6327A5B32F1D60DE00F358C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4QHZ94TSC9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = summit.DeHuntTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeHunt.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DeHunt";
+			};
+			name = Release;
+		};
 		63D6BE552EEF2D86005D6163 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -317,6 +436,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6327A5B12F1D60DE00F358C8 /* Build configuration list for PBXNativeTarget "DeHuntTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6327A5B22F1D60DE00F358C8 /* Debug */,
+				6327A5B32F1D60DE00F358C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		63D6BE472EEF2D84005D6163 /* Build configuration list for PBXProject "DeHunt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

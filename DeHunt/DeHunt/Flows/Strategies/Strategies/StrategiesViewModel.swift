@@ -41,6 +41,15 @@ final class StrategiesViewModel {
         setupSearchDebounce()
     }
     
+    deinit {
+        cancellables.removeAll()
+    }
+    
+    func cleanup() {
+        cancellables.forEach { $0.cancel() }
+        cancellables.removeAll()
+    }
+    
     var selectedChainsArray: [BlockchainChain] {
         BlockchainChain.allCases
             .filter { selectedChains.contains($0) }
