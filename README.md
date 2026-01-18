@@ -50,7 +50,7 @@ DeHunt is useful for Crypto Pool hunters/farmers. Built with SwiftUI and using l
 | **Haptics** | CoreHaptics |
 | **Effects** | GlassEffect (iOS 26) |
 | **API** | [DeFi Llama](https://api-docs.defillama.com/) |
-| **Persistence** | SwiftData |
+| **Unit Tests** | XCTest |
 | **Reactivity** | Combine (Search) |
 
 
