@@ -5,7 +5,7 @@
 DeHunt is useful for Crypto Pool hunters/farmers. Built with SwiftUI and using latest iOS-dev technologies. That is the reason why minimal iOS deployment version is 26.0. DeHunt Networking is based on DefiLlama API, so I want to express my gratitude for providing a lot of useful data for free.
 
 ![iOS](https://img.shields.io/badge/iOS-26.0+-blue?logo=apple)
-![Swift](https://img.shields.io/badge/Swift-5.0+-orange?logo=swift)
+![Swift](https://img.shields.io/badge/Swift-6.0+-orange?logo=swift)
 
 ---
 
@@ -110,11 +110,11 @@ if viewModel.isLoadingMetrics {
 ### Requirements
 - Xcode 26.0+
 - iOS 26.0+
-- Swift 5.0+
+- Swift 6.0+
 
 ```bash
 git clone https://github.com/delsummit/DeHunt.git
-cd dehunt
+cd DeHunt
 open DeHunt.xcodeproj
 ```
 ---
@@ -141,7 +141,7 @@ DeHunt uses the free [DeFi Llama API]([https://defillama.com/docs/api](https://a
 
 ## License
 
-MIT License — see [LICENSE](LICENSE) for details.
+MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
