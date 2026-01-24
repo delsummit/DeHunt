@@ -19,6 +19,7 @@ final class MockDeFiAPIClient: DeFiAPIClientProtocol {
     func fetchHistoricalTVL() async throws -> [HistoricalTVL] { [] }
 }
 
+@MainActor
 final class StrategiesViewModelTests: XCTestCase {
     var viewModel: StrategiesViewModel!
     var mockAPIClient: MockDeFiAPIClient!
