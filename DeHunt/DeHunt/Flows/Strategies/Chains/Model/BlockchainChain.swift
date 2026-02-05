@@ -62,7 +62,10 @@ enum BlockchainChain: String, CaseIterable, Identifiable {
     ]
     
     private var config: ChainConfig {
-        Self.configs[self]!
+        guard let config = Self.configs[self] else {
+            fatalError("Missing config for chain: \(self.rawValue)")
+        }
+        return config
     }
     
     var trustWalletIconURL: URL? {

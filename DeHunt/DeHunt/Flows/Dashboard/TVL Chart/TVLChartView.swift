@@ -13,6 +13,7 @@ struct TVLChartView: View {
     @State private var selectedDate: Date?
     @State private var selectedTVL: Double?
     @State private var lastHapticDate: Date?
+    @State private var shouldPlayMilestone = false
     private let haptics = HapticsEngine.shared
     
     var body: some View {
@@ -31,6 +32,14 @@ struct TVLChartView: View {
         .background(chartBackground)
         .onAppear {
             haptics.prepareHaptics()
+        }
+        
+        .task(id: shouldPlayMilestone) {
+            guard shouldPlayMilestone else { return }
+            
+            try? await Task.sleep(for: .milliseconds(100))
+            haptics.milestone()
+            shouldPlayMilestone = false
         }
     }
     
@@ -219,9 +228,7 @@ struct TVLChartView: View {
         haptics.lightTap()
         
         if tvl == viewModel.tvlStats.min || tvl == viewModel.tvlStats.max {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.haptics.milestone()
-            }
+            shouldPlayMilestone = true
         }
     }
     

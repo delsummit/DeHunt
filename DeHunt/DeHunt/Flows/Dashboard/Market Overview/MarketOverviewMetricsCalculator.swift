@@ -73,9 +73,10 @@ struct MarketOverviewMetricsCalculator {
             guard let chains = proto.chains, let tvl = proto.tvl else { continue }
             
             for chain in chains {
-                if chainData[chain] != nil {
-                    chainData[chain]!.tvl += tvl
-                    chainData[chain]!.protocols.append(proto)
+                if var data = chainData[chain] {
+                    data.tvl += tvl
+                    data.protocols.append(proto)
+                    chainData[chain] = data
                 } else {
                     chainData[chain] = (tvl, [proto])
                 }

@@ -5,7 +5,7 @@
 //  Created by Rostyslav Mukoida on 04/01/2026.
 //
 
-import SwiftUI
+import Foundation
 import Observation
 import Combine
 
