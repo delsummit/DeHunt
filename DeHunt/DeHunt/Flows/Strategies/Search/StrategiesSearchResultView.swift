@@ -12,14 +12,19 @@ struct StrategiesSearchResultView: View {
     @Bindable var viewModel: StrategiesViewModel
     
     @State private var sortOption: PoolSortOption = .none
+    @State private var sortDirection: SortDirection = .descending
+    
+    private var displayedPools: [YieldPool] {
+        pools.isEmpty ? viewModel.filteredPools : pools
+    }
     
     private var sortedPools: [YieldPool] {
-        sortOption.sort(viewModel.filteredPools)
+        sortOption.sort(displayedPools, direction: sortDirection)
     }
     
     var body: some View {
         Group {
-            if viewModel.filteredPools.isEmpty {
+            if displayedPools.isEmpty {
                 emptyStateView
             } else {
                 ScrollView {
@@ -27,7 +32,8 @@ struct StrategiesSearchResultView: View {
                         ForEach(sortedPools) { pool in
                             
                             StrategiesSearchResultPoolRow(pool: pool)
-                                .padding()
+                                .padding(.horizontal)
+                                .padding(.vertical, 5)
                                 .background(.backgroundSecondary)
                                 .clipShape(RoundedRectangle(cornerRadius: 16))
                                 .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
@@ -49,24 +55,41 @@ struct StrategiesSearchResultView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Menu {
-                    ForEach(PoolSortOption.allCases) { option in
-                        Button {
-                            sortOption = option
-                        } label: {
-                            HStack {
-                                Text(option.rawValue)
-                                if sortOption == option {
-                                    Image(systemName: "checkmark")
-                                }
+                    Picker(selection: Binding(
+                        get: { sortOption },
+                        set: { newValue in
+                            if sortOption == newValue && newValue != .none {
+                                sortDirection.toggle()
+                            } else {
+                                sortOption = newValue
+                                sortDirection = .descending
                             }
                         }
+                    )) {
+                        ForEach(PoolSortOption.allCases) { option in
+                            HStack {
+                                Image(systemName: option.icon)
+                                Text(option.displayName)
+                                
+                                if sortOption == option && option != .none {
+                                    Spacer()
+                                    Image(systemName: sortDirection.icon)
+                                        .font(.caption)
+                                }
+                            }
+                            .tag(option)
+                        }
+                    } label: {
+                        EmptyView()
                     }
+                    .pickerStyle(.inline)
+                    .labelsHidden()
                 } label: {
                     HStack(spacing: 4) {
-                        Image(systemName: sortOption.firstIcon)
+                        Image(systemName: sortOption.icon)
                         if sortOption != .none {
-                            Image(systemName: sortOption.secondIcon)
-                                .font(.caption)
+                            Image(systemName: sortDirection.icon)
+                                .fontWeight(.regular)
                         }
                     }
                     .foregroundStyle(.white)
