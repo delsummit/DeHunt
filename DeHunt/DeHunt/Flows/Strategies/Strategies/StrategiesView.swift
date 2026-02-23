@@ -35,16 +35,27 @@ struct StrategiesView: View {
         
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem {
+                    Button {
+                        // fav pools hash
+                    } label: {
+                        Image(systemName: "star.fill")
+                            .foregroundStyle(.element)
+                    }
+                }
+                
                 if focusedField != nil {
-                    ToolbarItem(placement: .topBarTrailing) {
+                    ToolbarItem {
                         Button("Done") {
-                            focusedField = nil
+                            withAnimation(.smooth) {
+                                focusedField = nil
+                            }
                         }
-                        .foregroundStyle(.element)
                         .fontWeight(.semibold)
                     }
                 }
             }
+            .animation(.smooth, value: focusedField)
             .onTapGesture {
                 focusedField = nil
             }
