@@ -7,9 +7,35 @@
 
 import SwiftUI
 
+struct PoolCardWrapper: View {
+    let pool: YieldPool
+    @State private var isPressed = false
+    
+    var body: some View {
+        StrategiesSearchResultPoolRow(pool: pool, isPressed: $isPressed)
+            .padding(.horizontal)
+            .padding(.vertical, 5)
+            .background(.backgroundSecondary)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.backgroundTertiary.opacity(0.5), lineWidth: 1)
+            )
+            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+            .scaleEffect(isPressed ? 0.95 : 1.0)
+            .animation(.spring(response: 0.3, dampingFraction: 0.65), value: isPressed)
+            .contentShape(Rectangle())
+            .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity) {
+            } onPressingChanged: { pressing in
+                isPressed = pressing
+            }
+    }
+}
+
 struct StrategiesSearchResultView: View {
     let pools: [YieldPool]
     @Bindable var viewModel: StrategiesViewModel
+    @State private var isPressed = false
     
     @State private var sortOption: PoolSortOption = .none
     @State private var sortDirection: SortDirection = .descending
@@ -30,13 +56,7 @@ struct StrategiesSearchResultView: View {
                 ScrollView {
                     LazyVStack(spacing: 12) {
                         ForEach(sortedPools) { pool in
-                            
-                            StrategiesSearchResultPoolRow(pool: pool)
-                                .padding(.horizontal)
-                                .padding(.vertical, 5)
-                                .background(.backgroundSecondary)
-                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                                .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+                            PoolCardWrapper(pool: pool)
                         }
                     }
                     .padding()

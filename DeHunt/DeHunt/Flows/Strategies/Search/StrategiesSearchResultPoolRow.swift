@@ -10,9 +10,10 @@ import SwiftUI
 struct StrategiesSearchResultPoolRow: View {
     let pool: YieldPool
     @Environment(\.openURL) private var openURL
+    @Binding var isPressed: Bool
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Button {
                     if let url = URL(string: "https://defillama.com/yields/pool/\(pool.pool)") {

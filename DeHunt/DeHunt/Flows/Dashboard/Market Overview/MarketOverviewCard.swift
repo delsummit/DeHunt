@@ -40,6 +40,7 @@ struct MarketOverviewCard: View {
         .shadow(color: .black.opacity(0.06), radius: 4, x: 0, y: 2)
         .scaleEffect(isPressed ? 0.93 : 1.0)
         .animation(.spring(response: 0.3, dampingFraction: 0.65), value: isPressed)
+        .contentShape(Rectangle())
         .gesture(
             DragGesture(minimumDistance: 0)
                 .onChanged { _ in
