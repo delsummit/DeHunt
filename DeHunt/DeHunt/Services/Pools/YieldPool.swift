@@ -6,18 +6,44 @@
 //
 
 import Foundation
+import SwiftData
 
 struct YieldPoolResponse: Decodable {
     let status: String
     let data: [YieldPool]
 }
 
-struct YieldPool: Decodable, Identifiable, Hashable {
+@Model
+final class YieldPool: Identifiable, Decodable {
+    @Attribute(.unique) var pool: String
+    var chain: String
+    var project: String
+    var symbol: String
+    var tvlUsd: Double
+    var apy: Double
+    
     var id: String { pool }
-    let pool: String
-    let chain: String
-    let project: String
-    let symbol: String
-    let tvlUsd: Double
-    let apy: Double
+    
+    init(pool: String, chain: String, project: String, symbol: String, tvlUsd: Double, apy: Double) {
+        self.pool = pool
+        self.chain = chain
+        self.project = project
+        self.symbol = symbol
+        self.tvlUsd = tvlUsd
+        self.apy = apy
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.pool = try container.decode(String.self, forKey: .pool)
+        self.chain = try container.decode(String.self, forKey: .chain)
+        self.project = try container.decode(String.self, forKey: .project)
+        self.symbol = try container.decode(String.self, forKey: .symbol)
+        self.tvlUsd = try container.decode(Double.self, forKey: .tvlUsd)
+        self.apy = try container.decode(Double.self, forKey: .apy)
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case pool, chain, project, symbol, tvlUsd, apy
+    }
 }

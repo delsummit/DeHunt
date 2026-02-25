@@ -23,6 +23,7 @@ final class StrategiesViewModel {
     var isLoading = false
     var errorMessage: String?
     var shouldShowResults = false
+    var selectedPoolIds: Set<String> = []
     
     var searchText: String = "" {
         didSet {
@@ -111,6 +112,18 @@ final class StrategiesViewModel {
     
     func setMinTVLAmount(_ value: Double?) {
         minTVLValue = value
+    }
+    
+    func togglePoolSelection(_ poolId: String) {
+        if selectedPoolIds.contains(poolId) {
+            selectedPoolIds.remove(poolId)
+        } else {
+            selectedPoolIds.insert(poolId)
+        }
+    }
+    
+    func isPoolSelected(_ poolId: String) -> Bool {
+        selectedPoolIds.contains(poolId)
     }
     
     func isChainSelected(_ chain: BlockchainChain) -> Bool {
