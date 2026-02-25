@@ -59,9 +59,6 @@ struct StrategiesView: View {
             .onTapGesture {
                 focusedField = nil
             }
-            .onAppear {
-                HapticsEngine.shared.prepareHaptics()
-            }
         }
     }
     

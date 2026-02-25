@@ -30,10 +30,6 @@ struct TVLChartView: View {
         }
         .padding()
         .background(chartBackground)
-        .onAppear {
-            haptics.prepareHaptics()
-        }
-        
         .task(id: shouldPlayMilestone) {
             guard shouldPlayMilestone else { return }
             
