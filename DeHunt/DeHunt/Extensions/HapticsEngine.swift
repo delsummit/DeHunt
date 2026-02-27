@@ -50,8 +50,8 @@ final class HapticsEngine {
     func select() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
         
-        let intensityParam = CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.7)
-        let sharpnessParam = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.3)
+        let intensityParam = CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.9)
+        let sharpnessParam = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.5)
         
         let event = CHHapticEvent(
             eventType: .hapticTransient,

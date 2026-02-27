@@ -8,6 +8,7 @@
 import Foundation
 import Observation
 import Combine
+import SwiftData
 
 @Observable
 final class StrategiesViewModel {
@@ -32,14 +33,26 @@ final class StrategiesViewModel {
     }
     
     private let apiClient: DeFiAPIClientProtocol
+    private let modelContext: ModelContext?
     
     private let searchTextSubject = PassthroughSubject<String, Never>()
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialization
-    init(apiClient: DeFiAPIClientProtocol = DeFiAPIClient()) {
+    init(apiClient: DeFiAPIClientProtocol = DeFiAPIClient(), modelContext: ModelContext? = nil) {
         self.apiClient = apiClient
+        self.modelContext = modelContext
         setupSearchDebounce()
+        loadSelectedPools()
+    }
+    
+    private func loadSelectedPools() {
+        guard let modelContext = modelContext else { return }
+        
+        let descriptor = FetchDescriptor<YieldPool>()
+        if let savedPools = try? modelContext.fetch(descriptor) {
+            selectedPoolIds = Set(savedPools.map { $0.pool })
+        }
     }
     
     func cleanup() {
@@ -114,11 +127,31 @@ final class StrategiesViewModel {
         minTVLValue = value
     }
     
-    func togglePoolSelection(_ poolId: String) {
-        if selectedPoolIds.contains(poolId) {
-            selectedPoolIds.remove(poolId)
+    func togglePoolSelection(_ pool: YieldPool) {
+        guard let modelContext = modelContext else { return }
+        
+        if selectedPoolIds.contains(pool.pool) {
+            selectedPoolIds.remove(pool.pool)
+            let poolId = pool.pool
+            let descriptor = FetchDescriptor<YieldPool>(
+                predicate: #Predicate { p in p.pool == poolId }
+            )
+            if let poolToDelete = try? modelContext.fetch(descriptor).first {
+                modelContext.delete(poolToDelete)
+                try? modelContext.save()
+            }
         } else {
-            selectedPoolIds.insert(poolId)
+            selectedPoolIds.insert(pool.pool)
+            let newPool = YieldPool(
+                pool: pool.pool,
+                chain: pool.chain,
+                project: pool.project,
+                symbol: pool.symbol,
+                tvlUsd: pool.tvlUsd,
+                apy: pool.apy
+            )
+            modelContext.insert(newPool)
+            try? modelContext.save()
         }
     }
     

@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct StrategiesView: View {
-    @State private var viewModel = StrategiesViewModel()
+    @Environment(\.modelContext) private var modelContext
+    @State private var viewModel: StrategiesViewModel?
     
     enum FocusedField {
         case investmentAmount
@@ -17,27 +19,35 @@ struct StrategiesView: View {
     }
     
     @FocusState private var focusedField: FocusedField?
+    @State private var showWatchlist = false
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                content
-                
-                searchButton
-                
-                defiLlamaMention
-            }
-            .background(Color.backgroundPrimary.ignoresSafeArea())
-            .navigationTitle("Strategies")
-            .navigationDestination(isPresented: $viewModel.shouldShowResults) {
-                StrategiesSearchResultView(pools: viewModel.filteredPools, viewModel: viewModel)
-            }
+            if let viewModel = viewModel {
+                ScrollView {
+                    content
+                    
+                    searchButton
+                    
+                    defiLlamaMention
+                }
+                .background(Color.backgroundPrimary.ignoresSafeArea())
+                .navigationTitle("Strategies")
+                .navigationDestination(isPresented: Binding(
+                    get: { viewModel.shouldShowResults },
+                    set: { _ in }
+                )) {
+                    StrategiesSearchResultView(pools: viewModel.filteredPools, viewModel: viewModel)
+                }
+                .navigationDestination(isPresented: $showWatchlist) {
+                    PoolWatchlistView(viewModel: viewModel)
+                }
         
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem {
                     Button {
-                        // fav pools hash
+                        showWatchlist = true
                     } label: {
                         Image(systemName: "star.fill")
                             .foregroundStyle(.element)
@@ -55,83 +65,95 @@ struct StrategiesView: View {
                     }
                 }
             }
-            .animation(.smooth, value: focusedField)
-            .onTapGesture {
-                focusedField = nil
+                .animation(.smooth, value: focusedField)
+                .onTapGesture {
+                    focusedField = nil
+                }
+            }
+        }
+        .onAppear {
+            if viewModel == nil {
+                viewModel = StrategiesViewModel(modelContext: modelContext)
             }
         }
     }
     
     @ViewBuilder
     private var content: some View {
-        VStack {
-            StrategiesUserInputMoneyView(viewModel: viewModel, focusedField: $focusedField)
-            
-            Divider()
-                .frame(height: 20)
-            
-            StrategiesMinTVLView(viewModel: viewModel, focusedField: $focusedField)
-            
-            Divider()
-                .frame(height: 20)
-            
-            StrategiesChainSelectionView(viewModel: viewModel)
-            
-            Divider()
-                .frame(height: 20)
-            
-            StrategiesAPYSliderView(viewModel: viewModel, focusedField: $focusedField)
+        if let viewModel = viewModel {
+            VStack {
+                StrategiesUserInputMoneyView(viewModel: viewModel, focusedField: $focusedField)
+                
+                Divider()
+                    .frame(height: 20)
+                
+                StrategiesMinTVLView(viewModel: viewModel, focusedField: $focusedField)
+                
+                Divider()
+                    .frame(height: 20)
+                
+                StrategiesChainSelectionView(viewModel: viewModel)
+                
+                Divider()
+                    .frame(height: 20)
+                
+                StrategiesAPYSliderView(viewModel: viewModel, focusedField: $focusedField)
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 24)
+                    .fill(Color.backgroundSecondary)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 24)
+                    .stroke(Color.gray.opacity(0), lineWidth: 1)
+            )
+            .padding()
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 24)
-                .fill(Color.backgroundSecondary)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 24)
-                .stroke(Color.gray.opacity(0), lineWidth: 1)
-        )
-        .padding()
     }
     
     private var searchButton: some View {
-        VStack(spacing: 12) {
-            Button(action: {
-                Task {
-                    await viewModel.performSearch()
-                }
-            }) {
-                HStack {
-                    if viewModel.isLoading {
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                            .tint(.white)
-                    } else {
-                        Image(systemName: "magnifyingglass")
+        Group {
+            if let viewModel = viewModel {
+                VStack(spacing: 12) {
+                    Button(action: {
+                        Task {
+                            await viewModel.performSearch()
+                        }
+                    }) {
+                        HStack {
+                            if viewModel.isLoading {
+                                ProgressView()
+                                    .progressViewStyle(.circular)
+                                    .tint(.white)
+                            } else {
+                                Image(systemName: "magnifyingglass")
+                            }
+                            
+                            Text(viewModel.isLoading ? "Searching..." : "Search pools")
+                        }
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
                     }
+                    .buttonStyle(.glassProminent)
+                    .tint(.backgroundSecondary)
+                    .disabled(viewModel.isLoading)
                     
-                    Text(viewModel.isLoading ? "Searching..." : "Search pools")
-                }
-                .font(.headline)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 8)
-            }
-            .buttonStyle(.glassProminent)
-            .tint(.backgroundSecondary)
-            .disabled(viewModel.isLoading)
-            
-            if let errorMessage = viewModel.errorMessage {
-                HStack(spacing: 8) {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundStyle(.accentRed)
-                    Text(errorMessage)
-                        .font(.caption)
-                        .foregroundStyle(.textSecondary)
+                    if let errorMessage = viewModel.errorMessage {
+                        HStack(spacing: 8) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundStyle(.accentRed)
+                            Text(errorMessage)
+                                .font(.caption)
+                                .foregroundStyle(.textSecondary)
+                        }
+                        .padding(.horizontal)
+                    }
                 }
                 .padding(.horizontal)
             }
         }
-        .padding(.horizontal)
     }
     
     private var defiLlamaMention: some View {
