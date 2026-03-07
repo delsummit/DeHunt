@@ -133,7 +133,6 @@ DeHunt uses the free [DeFi Llama API]([https://defillama.com/docs/api](https://a
 ---
 
 ## TODO
-* Implement Favourite pools and store them in SwiftData
 * Cache unrepeatable icons/data to optimise loading and networking
 * Create Firebase account and implement user database
 * more to come...
