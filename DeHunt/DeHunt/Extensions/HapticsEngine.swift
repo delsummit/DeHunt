@@ -1,6 +1,6 @@
 //
 //  HapticsEngine.swift
-//  Genora
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 24/12/2025.
 //

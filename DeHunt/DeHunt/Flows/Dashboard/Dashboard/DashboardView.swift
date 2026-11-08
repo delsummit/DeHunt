@@ -1,6 +1,6 @@
 //
 //  DashboardView.swift
-//  Genora
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 14/12/2025.
 //

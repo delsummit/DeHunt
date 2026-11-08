@@ -1,6 +1,6 @@
 //
 //  DashboardViewModel.swift
-//  Genora
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 18/12/2025.
 //
@@ -73,11 +73,11 @@ final class DashboardViewModel {
                 metricsErrorMessage = "No data available"
             }
             
-        } catch LiamaAPIError.invalidURL {
+        } catch LlamaAPIError.invalidURL {
             metricsErrorMessage = "Invalid URL"
-        } catch LiamaAPIError.invalidResponse {
+        } catch LlamaAPIError.invalidResponse {
             metricsErrorMessage = "Invalid response"
-        } catch LiamaAPIError.invalidData {
+        } catch LlamaAPIError.invalidData {
             metricsErrorMessage = "Invalid data"
         } catch {
             metricsErrorMessage = "Unexpected error: \(error.localizedDescription)"
@@ -95,11 +95,11 @@ final class DashboardViewModel {
             historicalData = tvlProcessor.process(rawData, days: 14)
             tvlStats = tvlProcessor.calculateStats(from: historicalData)
             
-        } catch LiamaAPIError.invalidURL {
+        } catch LlamaAPIError.invalidURL {
             tvlErrorMessage = "Invalid URL"
-        } catch LiamaAPIError.invalidResponse {
+        } catch LlamaAPIError.invalidResponse {
             tvlErrorMessage = "Invalid response"
-        } catch LiamaAPIError.invalidData {
+        } catch LlamaAPIError.invalidData {
             tvlErrorMessage = "Invalid data"
         } catch {
             tvlErrorMessage = "Unexpected error: \(error.localizedDescription)"

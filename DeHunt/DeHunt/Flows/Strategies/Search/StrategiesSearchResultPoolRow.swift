@@ -1,6 +1,6 @@
 //
 //  StrategiesSearchResultPoolRow.swift
-//  Genora
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 11/01/2026.
 //

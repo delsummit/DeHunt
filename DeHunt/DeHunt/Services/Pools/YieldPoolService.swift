@@ -1,6 +1,6 @@
 //
-//  PoolsService.swift
-//  Genora
+//  YieldPoolService.swift
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 04/01/2026.
 //

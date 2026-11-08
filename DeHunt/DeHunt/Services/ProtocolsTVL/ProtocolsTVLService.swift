@@ -1,6 +1,6 @@
 //
-//  ProtocolsService.swift
-//  Genora
+//  ProtocolsTVLService.swift
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 25/12/2025.
 //

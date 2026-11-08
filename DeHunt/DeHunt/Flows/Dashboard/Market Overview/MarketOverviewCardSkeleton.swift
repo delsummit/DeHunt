@@ -1,6 +1,6 @@
 //
 //  MarketOverviewCardSkeleton.swift
-//  Genora
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 18/12/2025.
 //

@@ -1,6 +1,6 @@
 //
-//  StrategiesChainSelectionSheetView.swift.swift
-//  Genora
+//  StrategiesChainSelectionSheetView.swift
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 06/01/2026.
 //

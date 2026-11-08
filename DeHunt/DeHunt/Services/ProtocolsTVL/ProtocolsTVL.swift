@@ -1,6 +1,6 @@
 //
 //  ProtocolsTVL.swift
-//  Genora
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 17/12/2025.
 //

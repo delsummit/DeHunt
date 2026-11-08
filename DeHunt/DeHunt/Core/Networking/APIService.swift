@@ -1,6 +1,6 @@
 //
-//  ApiService.swift
-//  Genora
+//  APIService.swift
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 17/12/2025.
 //
@@ -17,7 +17,7 @@ final class APIService: APIServiceProtocol {
     
     func fetch<T: Decodable>(from endpoint: String) async throws -> T {
         guard let url = URL(string: endpoint) else {
-            throw LiamaAPIError.invalidURL
+            throw LlamaAPIError.invalidURL
         }
         
         var request = URLRequest(url: url)
@@ -26,19 +26,19 @@ final class APIService: APIServiceProtocol {
         let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw LiamaAPIError.invalidResponse
+            throw LlamaAPIError.invalidResponse
         }
         
         do {
             let decoder = JSONDecoder()
             return try decoder.decode(T.self, from: data)
         } catch {
-            throw LiamaAPIError.invalidData
+            throw LlamaAPIError.invalidData
         }
     }
 }
 
-enum LiamaAPIError: Error {
+enum LlamaAPIError: Error {
     case invalidURL
     case invalidResponse
     case invalidData

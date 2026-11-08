@@ -1,6 +1,6 @@
 //
-//  StrategiesUserInputView.swift
-//  Genora
+//  StrategiesUserInputMoneyView.swift
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 02/01/2026.
 //

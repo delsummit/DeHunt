@@ -1,6 +1,6 @@
 //
 //  MarketOverviewMetric.swift
-//  Genora
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 16/12/2025.
 //

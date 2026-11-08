@@ -1,6 +1,6 @@
 //
 //  YieldPool.swift
-//  Genora
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 02/01/2026.
 //

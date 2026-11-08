@@ -1,6 +1,6 @@
 //
-//  DeFiLiamaEndpoint.swift
-//  Genora
+//  DefiLlamaEndpoint.swift
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 25/12/2025.
 //

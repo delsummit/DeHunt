@@ -1,6 +1,6 @@
 //
 //  StrategiesMinTVLView.swift
-//  Genora
+//  DeHunt
 //
 //  Created by Rostyslav Mukoida on 10/01/2026.
 //
