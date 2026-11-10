@@ -48,7 +48,7 @@ enum BlockchainChain: String, CaseIterable, Identifiable {
         .binance: ChainConfig("Binance", tw: "smartchain", api: ["Binance", "BSC"]),
         .polygon: ChainConfig("Polygon", tw: "polygon", api: ["Polygon"]),
         .arbitrum: ChainConfig("Arbitrum", tw: "arbitrum", api: ["Arbitrum"]),
-        .optimism: ChainConfig("Optimism", tw: "optimism", api: ["Optimism"]),
+        .optimism: ChainConfig("Optimism", tw: "optimism", api: ["OP Mainnet", "Optimism"]),
         .avalanche: ChainConfig("Avalanche", tw: "avalanchec", api: ["Avalanche"]),
         .fantom: ChainConfig("Fantom", tw: "fantom", api: ["Fantom"]),
         .solana: ChainConfig("Solana", tw: "solana", api: ["Solana"]),
@@ -56,7 +56,7 @@ enum BlockchainChain: String, CaseIterable, Identifiable {
         .tron: ChainConfig("Tron", tw: "tron", api: ["Tron"]),
         .aptos: ChainConfig("Aptos", tw: "aptos", api: ["Aptos"]),
         .plasma: ChainConfig("Plasma", tw: "plasma", api: ["Plasma"]),
-        .hyperliquid: ChainConfig("Hyperliquid L1", tw: "hyperliquid", api: ["Hyperliquid"]),
+        .hyperliquid: ChainConfig("Hyperliquid L1", tw: "hyperliquid", api: ["Hyperliquid L1", "Hyperliquid"]),
         .sui: ChainConfig("Sui", tw: "sui", api: ["Sui"]),
         .ton: ChainConfig("TON", tw: "ton", api: ["TON", "Ton"])
     ]
