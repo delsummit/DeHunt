@@ -25,34 +25,44 @@ final class StrategiesViewModel {
     var errorMessage: String?
     var shouldShowResults = false
     var selectedPoolIds: Set<String> = []
-    
+
+    var isRefreshingWatchlist = false
+    var watchlistUpdatedAt: Date?
+    var watchlistErrorMessage: String?
+
     var searchText: String = "" {
         didSet {
             searchTextSubject.send(searchText)
         }
     }
-    
-    private let apiClient: DeFiAPIClientProtocol
+
+    private let apiClient: any DeFiAPIClientProtocol
     private let modelContext: ModelContext?
-    
+    private let watchlistRefresher: WatchlistRefresher
+
     private let searchTextSubject = PassthroughSubject<String, Never>()
     private var cancellables = Set<AnyCancellable>()
-    
+
     // MARK: - Initialization
-    init(apiClient: DeFiAPIClientProtocol = DeFiAPIClient(), modelContext: ModelContext? = nil) {
+    init(
+        apiClient: any DeFiAPIClientProtocol = DeFiAPIClient(),
+        modelContext: ModelContext? = nil,
+        watchlistRefresher: WatchlistRefresher? = nil
+    ) {
         self.apiClient = apiClient
         self.modelContext = modelContext
+        self.watchlistRefresher = watchlistRefresher ?? WatchlistRefresher(apiClient: apiClient)
         setupSearchDebounce()
         loadSelectedPools()
     }
-    
+
     private func loadSelectedPools() {
-        guard let modelContext = modelContext else { return }
-        
-        let descriptor = FetchDescriptor<YieldPool>()
-        if let savedPools = try? modelContext.fetch(descriptor) {
-            selectedPoolIds = Set(savedPools.map { $0.pool })
-        }
+        selectedPoolIds = Set(savedWatchlistPools().map(\.poolId))
+    }
+
+    private func savedWatchlistPools() -> [WatchlistPool] {
+        guard let modelContext else { return [] }
+        return (try? modelContext.fetch(FetchDescriptor<WatchlistPool>())) ?? []
     }
     
     func cleanup() {
@@ -133,8 +143,8 @@ final class StrategiesViewModel {
         if selectedPoolIds.contains(pool.pool) {
             selectedPoolIds.remove(pool.pool)
             let poolId = pool.pool
-            let descriptor = FetchDescriptor<YieldPool>(
-                predicate: #Predicate { p in p.pool == poolId }
+            let descriptor = FetchDescriptor<WatchlistPool>(
+                predicate: #Predicate { saved in saved.poolId == poolId }
             )
             if let poolToDelete = try? modelContext.fetch(descriptor).first {
                 modelContext.delete(poolToDelete)
@@ -142,21 +152,40 @@ final class StrategiesViewModel {
             }
         } else {
             selectedPoolIds.insert(pool.pool)
-            let newPool = YieldPool(
-                pool: pool.pool,
-                chain: pool.chain,
-                project: pool.project,
-                symbol: pool.symbol,
-                tvlUsd: pool.tvlUsd,
-                apy: pool.apy
-            )
-            modelContext.insert(newPool)
+            modelContext.insert(WatchlistPool(pool: pool))
             try? modelContext.save()
         }
     }
-    
+
     func isPoolSelected(_ poolId: String) -> Bool {
         selectedPoolIds.contains(poolId)
+    }
+
+    func refreshWatchlist() async {
+        guard let modelContext, !isRefreshingWatchlist else { return }
+
+        let poolIds = savedWatchlistPools().map(\.poolId)
+        guard !poolIds.isEmpty else { return }
+
+        isRefreshingWatchlist = true
+        watchlistErrorMessage = nil
+        defer { isRefreshingWatchlist = false }
+
+        let snapshots = await watchlistRefresher.latestSnapshots(for: poolIds)
+
+        guard !snapshots.isEmpty else {
+            watchlistErrorMessage = "Couldn't update the watchlist. Showing the last known values."
+            return
+        }
+
+        let now = Date.now
+        for pool in savedWatchlistPools() {
+            if let snapshot = snapshots[pool.poolId] {
+                pool.apply(snapshot, at: now)
+            }
+        }
+        try? modelContext.save()
+        watchlistUpdatedAt = now
     }
     
     func isChainSelected(_ chain: BlockchainChain) -> Bool {

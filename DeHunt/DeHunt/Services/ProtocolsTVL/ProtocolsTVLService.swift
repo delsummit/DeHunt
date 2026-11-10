@@ -7,15 +7,15 @@
 
 import Foundation
 
-protocol ProtocolsServiceProtocol {
+nonisolated protocol ProtocolsServiceProtocol: Sendable {
     func fetchProtocols() async throws -> [ProtocolsTVL]
 }
 
-final class ProtocolsService: ProtocolsServiceProtocol {
+nonisolated final class ProtocolsService: ProtocolsServiceProtocol {
     
-    private let apiService: APIServiceProtocol
+    private let apiService: any APIServiceProtocol
     
-    init(apiService: APIServiceProtocol = APIService.shared) {
+    init(apiService: any APIServiceProtocol = APIService.shared) {
         self.apiService = apiService
     }
     

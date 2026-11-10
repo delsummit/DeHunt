@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProtocolsTVL: Decodable {
+nonisolated struct ProtocolsTVL: Decodable, Sendable {
     let id: String
     let name: String
     let symbol: String?

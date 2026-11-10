@@ -7,15 +7,15 @@
 
 import Foundation
 
-protocol HistoricalTVLServiceProtocol {
+nonisolated protocol HistoricalTVLServiceProtocol: Sendable {
     func fetchHistoricalTVL() async throws -> [HistoricalTVL]
 }
 
-final class HistoricalTVLService: HistoricalTVLServiceProtocol {
+nonisolated final class HistoricalTVLService: HistoricalTVLServiceProtocol {
     
-    private let apiService: APIServiceProtocol
+    private let apiService: any APIServiceProtocol
     
-    init(apiService: APIServiceProtocol = APIService.shared) {
+    init(apiService: any APIServiceProtocol = APIService.shared) {
         self.apiService = apiService
     }
     

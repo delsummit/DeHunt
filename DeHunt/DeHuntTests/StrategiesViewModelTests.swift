@@ -17,6 +17,7 @@ final class MockDeFiAPIClient: DeFiAPIClientProtocol {
     func fetchYieldPools() async throws -> [YieldPool] { [] }
     func fetchProtocols() async throws -> [ProtocolsTVL] { [] }
     func fetchHistoricalTVL() async throws -> [HistoricalTVL] { [] }
+    func fetchPoolChart(poolId: String) async throws -> [PoolChartPoint] { [] }
 }
 
 @MainActor

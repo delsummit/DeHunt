@@ -20,6 +20,6 @@ struct DeHuntApp: App {
             MainView()
                 .preferredColorScheme(.dark)
         }
-        .modelContainer(for: [YieldPool.self])
+        .modelContainer(for: [WatchlistPool.self])
     }
 }

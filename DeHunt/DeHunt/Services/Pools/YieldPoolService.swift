@@ -7,15 +7,15 @@
 
 import Foundation
 
-protocol YieldPoolServiceProtocol {
+nonisolated protocol YieldPoolServiceProtocol: Sendable {
     func fetchYieldPools() async throws -> [YieldPool]
 }
 
-final class YieldPoolService: YieldPoolServiceProtocol {
+nonisolated final class YieldPoolService: YieldPoolServiceProtocol {
     
-    private let apiService: APIServiceProtocol
+    private let apiService: any APIServiceProtocol
     
-    init(apiService: APIServiceProtocol = APIService.shared) {
+    init(apiService: any APIServiceProtocol = APIService.shared) {
         self.apiService = apiService
     }
     

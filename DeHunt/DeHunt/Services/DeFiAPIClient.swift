@@ -8,42 +8,48 @@
 import Foundation
 
 // MARK: - API Client Protocol
-protocol DeFiAPIClientProtocol {
-    var protocols: ProtocolsServiceProtocol { get }
-    var tvl: HistoricalTVLServiceProtocol { get }
-    var yieldPools: YieldPoolServiceProtocol { get }
-    
+
+nonisolated protocol DeFiAPIClientProtocol: Sendable {
     func fetchProtocols() async throws -> [ProtocolsTVL]
     func fetchHistoricalTVL() async throws -> [HistoricalTVL]
     func fetchYieldPools() async throws -> [YieldPool]
+    func fetchPoolChart(poolId: String) async throws -> [PoolChartPoint]
 }
 
 // MARK: - API Client
-final class DeFiAPIClient: DeFiAPIClientProtocol {
-    
-    let protocols: ProtocolsServiceProtocol
-    let tvl: HistoricalTVLServiceProtocol
-    let yieldPools: YieldPoolServiceProtocol
-    
+
+nonisolated final class DeFiAPIClient: DeFiAPIClientProtocol {
+
+    private let protocols: any ProtocolsServiceProtocol
+    private let tvl: any HistoricalTVLServiceProtocol
+    private let yieldPools: any YieldPoolServiceProtocol
+    private let poolCharts: any PoolChartServiceProtocol
+
     init(
-        protocols: ProtocolsServiceProtocol = ProtocolsService(),
-        tvl: HistoricalTVLServiceProtocol = HistoricalTVLService(),
-        yieldPools: YieldPoolServiceProtocol = YieldPoolService()
+        protocols: any ProtocolsServiceProtocol = ProtocolsService(),
+        tvl: any HistoricalTVLServiceProtocol = HistoricalTVLService(),
+        yieldPools: any YieldPoolServiceProtocol = YieldPoolService(),
+        poolCharts: any PoolChartServiceProtocol = PoolChartService()
     ) {
         self.protocols = protocols
         self.tvl = tvl
         self.yieldPools = yieldPools
+        self.poolCharts = poolCharts
     }
-    
+
     func fetchProtocols() async throws -> [ProtocolsTVL] {
         try await protocols.fetchProtocols()
     }
-    
+
     func fetchHistoricalTVL() async throws -> [HistoricalTVL] {
         try await tvl.fetchHistoricalTVL()
     }
-    
+
     func fetchYieldPools() async throws -> [YieldPool] {
         try await yieldPools.fetchYieldPools()
+    }
+
+    func fetchPoolChart(poolId: String) async throws -> [PoolChartPoint] {
+        try await poolCharts.fetchPoolChart(poolId: poolId)
     }
 }

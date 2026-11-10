@@ -7,23 +7,24 @@
 
 import Foundation
 
-enum DefiLlamaEndpoint {
+nonisolated enum DefiLlamaEndpoint {
     case protocols
     case historicalChainTVL
     case yieldPools
-    
+    case poolChart(id: String)
+
     private static let apiBaseURL = "https://api.llama.fi"
     private static let yieldsBaseURL = "https://yields.llama.fi"
-    
+
     var baseURL: String {
         switch self {
-        case .yieldPools:
+        case .yieldPools, .poolChart:
             return Self.yieldsBaseURL
         case .protocols, .historicalChainTVL:
             return Self.apiBaseURL
         }
     }
-    
+
     var path: String {
         switch self {
         case .protocols:
@@ -32,30 +33,12 @@ enum DefiLlamaEndpoint {
             return "/v2/historicalChainTvl"
         case .yieldPools:
             return "/pools"
+        case .poolChart(let id):
+            return "/chart/\(id)"
         }
     }
-    
+
     var url: String {
         baseURL + path
-    }
-    
-    func url(with queryItems: [String: String]? = nil) -> String {
-        guard let queryItems = queryItems, !queryItems.isEmpty else {
-            return url
-        }
-        
-        var components = URLComponents(string: url)
-        components?.queryItems = queryItems.map { URLQueryItem(name: $0.key, value: $0.value) }
-        return components?.url?.absoluteString ?? url
-    }
-}
-
-extension DefiLlamaEndpoint {
-    var urlValue: URL? {
-        URL(string: url)
-    }
-    
-    func urlValue(with queryItems: [String: String]? = nil) -> URL? {
-        URL(string: url(with: queryItems))
     }
 }

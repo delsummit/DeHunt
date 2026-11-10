@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Model
-struct HistoricalTVL: Codable, Identifiable {
+nonisolated struct HistoricalTVL: Codable, Identifiable, Sendable {
     var id: Int { date }
     let date: Int
     let tvl: Double
