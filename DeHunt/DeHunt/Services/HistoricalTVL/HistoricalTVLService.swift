@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DeHuntKit
 
 nonisolated protocol HistoricalTVLServiceProtocol: Sendable {
     func fetchHistoricalTVL() async throws -> [HistoricalTVL]

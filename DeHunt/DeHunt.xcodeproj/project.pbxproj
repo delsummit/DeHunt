@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		63B48AC030B6471A00EE67CA /* DeHuntKit in Frameworks */ = {isa = PBXBuildFile; productRef = 63B48ABF30B6471A00EE67CA /* DeHuntKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		6327A5AF2F1D60DE00F358C8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,11 @@
 			path = DeHuntTests;
 			sourceTree = "<group>";
 		};
+		63B48ABB30B646AE00EE67CA /* Packages */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Packages;
+			sourceTree = "<group>";
+		};
 		63D6BE4E2EEF2D84005D6163 /* DeHunt */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = DeHunt;
@@ -46,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63B48AC030B6471A00EE67CA /* DeHuntKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +65,7 @@
 		63D6BE432EEF2D84005D6163 = {
 			isa = PBXGroup;
 			children = (
+				63B48ABB30B646AE00EE67CA /* Packages */,
 				63D6BE4E2EEF2D84005D6163 /* DeHunt */,
 				6327A5AC2F1D60DE00F358C8 /* DeHuntTests */,
 				63D6BE4D2EEF2D84005D6163 /* Products */,
@@ -113,6 +124,7 @@
 			);
 			name = DeHunt;
 			packageProductDependencies = (
+				63B48ABF30B6471A00EE67CA /* DeHuntKit */,
 			);
 			productName = Genora;
 			productReference = 63D6BE4C2EEF2D84005D6163 /* DeHunt.app */;
@@ -146,6 +158,9 @@
 			);
 			mainGroup = 63D6BE432EEF2D84005D6163;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				63B48ABE30B6471A00EE67CA /* XCLocalSwiftPackageReference "Packages/DeHuntKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 63D6BE4D2EEF2D84005D6163 /* Products */;
 			projectDirPath = "";
@@ -464,6 +479,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		63B48ABE30B6471A00EE67CA /* XCLocalSwiftPackageReference "Packages/DeHuntKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/DeHuntKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		63B48ABF30B6471A00EE67CA /* DeHuntKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DeHuntKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 63D6BE442EEF2D84005D6163 /* Project object */;
 }

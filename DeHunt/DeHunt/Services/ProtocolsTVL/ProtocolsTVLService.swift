@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DeHuntKit
 
 nonisolated protocol ProtocolsServiceProtocol: Sendable {
     func fetchProtocols() async throws -> [ProtocolsTVL]

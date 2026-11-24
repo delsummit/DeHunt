@@ -8,6 +8,7 @@
 import Foundation
 import Synchronization
 @testable import DeHunt
+import DeHuntKit
 
 final class MockAPIService: APIServiceProtocol {
     private let responses: [String: Data]

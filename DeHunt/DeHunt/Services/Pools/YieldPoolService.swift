@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DeHuntKit
 
 nonisolated protocol YieldPoolServiceProtocol: Sendable {
     func fetchYieldPools() async throws -> [YieldPool]

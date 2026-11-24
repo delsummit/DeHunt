@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DeHuntKit
 
 nonisolated protocol PoolChartServiceProtocol: Sendable {
     func fetchPoolChart(poolId: String) async throws -> [PoolChartPoint]

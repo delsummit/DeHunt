@@ -1,18 +1,18 @@
 //
 //  APIService.swift
-//  DeHunt
+//  DeHuntKit
 //
-//  Created by Rostyslav Mukoida on 17/12/2025.
+//  Created by Rostyslav Mukoida on 17/12/2025. Moved to DeHuntKit on 24/11/2026
 //
 
 import Foundation
 
-nonisolated protocol APIServiceProtocol: Sendable {
+public protocol APIServiceProtocol: Sendable {
     func fetch<T: Decodable & Sendable>(from endpoint: String) async throws -> T
 }
 
-nonisolated final class APIService: APIServiceProtocol {
-    static let shared = APIService()
+public final class APIService: APIServiceProtocol {
+    public static let shared = APIService()
 
     private let session: URLSession
 
@@ -20,7 +20,7 @@ nonisolated final class APIService: APIServiceProtocol {
         self.session = session
     }
 
-    func fetch<T: Decodable & Sendable>(from endpoint: String) async throws -> T {
+    public func fetch<T: Decodable & Sendable>(from endpoint: String) async throws -> T {
         guard let url = URL(string: endpoint) else {
             throw LlamaAPIError.invalidURL
         }
@@ -47,7 +47,7 @@ nonisolated final class APIService: APIServiceProtocol {
     }
 }
 
-nonisolated enum LlamaAPIError: Error {
+public enum LlamaAPIError: Error {
     case invalidURL
     case invalidResponse
     case invalidData

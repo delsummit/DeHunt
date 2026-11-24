@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import DeHunt
+import DeHuntKit
 
 @MainActor
 final class DashboardViewModelTests: XCTestCase {

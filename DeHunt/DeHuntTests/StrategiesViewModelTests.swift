@@ -8,6 +8,7 @@
 import XCTest
 import SwiftData
 @testable import DeHunt
+import DeHuntKit
 
 @MainActor
 final class StrategiesViewModelTests: XCTestCase {
