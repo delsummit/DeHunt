@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import DeHunt
 import Networking
 @testable import DefiLlama
 
@@ -125,5 +124,11 @@ final class ServicesTests: XCTestCase {
             "https://yields.llama.fi/pools",
             "https://yields.llama.fi/chart/p1"
         ])
+    }
+}
+
+extension Data {
+    init(json: String) {
+        self = Data(json.utf8)
     }
 }

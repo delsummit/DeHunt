@@ -35,5 +35,19 @@ let package = Package(
                 .enableUpcomingFeature("ApproachableConcurrency")
             ]
         ),
+        .testTarget(
+            name: "NetworkingTests",
+            dependencies: ["Networking"],
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
+        ),
+        .testTarget(
+            name: "DefiLlamaTests",
+            dependencies: ["Networking", "DefiLlama"],
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
+        )
     ]
 )

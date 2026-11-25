@@ -6,8 +6,6 @@
 //
 
 import XCTest
-import DefiLlama
-@testable import DeHunt
 @testable import Networking
 
 final class APIServiceTests: XCTestCase {
@@ -31,10 +29,10 @@ final class APIServiceTests: XCTestCase {
         ]}
         """))
 
-        let response: YieldPoolResponse = try await makeSUT().fetch(from: endpoint)
+        let response: Payload = try await makeSUT().fetch(from: endpoint)
 
         XCTAssertEqual(response.data, [
-            YieldPool(pool: "p1", chain: "Ethereum", project: "lido", symbol: "STETH", tvlUsd: 21720072173, apy: 2.25)
+            Payload.Pool(pool: "p1", apy: 2.25)
         ])
     }
 
@@ -46,7 +44,7 @@ final class APIServiceTests: XCTestCase {
             return (response, Data(json: #"{"status": "success", "data": []}"#))
         }
 
-        let _: YieldPoolResponse = try await makeSUT().fetch(from: endpoint)
+        let _: Payload = try await makeSUT().fetch(from: endpoint)
 
         XCTAssertEqual(requestedURL?.absoluteString, endpoint)
     }
@@ -54,7 +52,7 @@ final class APIServiceTests: XCTestCase {
     func testNon200StatusThrowsInvalidResponse() async {
         StubURLProtocol.respond(status: 500, body: Data(json: #"{"status": "success", "data": []}"#))
 
-        let error = await fetchError(YieldPoolResponse.self)
+        let error = await fetchError(Payload.self)
 
         XCTAssertEqual(error as? LlamaAPIError, .invalidResponse)
     }
@@ -62,13 +60,13 @@ final class APIServiceTests: XCTestCase {
     func testMalformedJSONThrowsInvalidData() async {
         StubURLProtocol.respond(status: 200, body: Data(json: #"{"status": "success", "data": [{"pool": 1}]}"#))
 
-        let error = await fetchError(YieldPoolResponse.self)
+        let error = await fetchError(Payload.self)
 
         XCTAssertEqual(error as? LlamaAPIError, .invalidData)
     }
 
     func testEmptyEndpointThrowsInvalidURL() async {
-        let error = await fetchError(YieldPoolResponse.self, endpoint: "")
+        let error = await fetchError(Payload.self, endpoint: "")
 
         XCTAssertEqual(error as? LlamaAPIError, .invalidURL)
     }
@@ -76,7 +74,7 @@ final class APIServiceTests: XCTestCase {
     func testNetworkErrorIsPassedThrough() async {
         StubURLProtocol.handler = { _ in throw URLError(.notConnectedToInternet) }
 
-        let error = await fetchError(YieldPoolResponse.self)
+        let error = await fetchError(Payload.self)
 
         XCTAssertEqual((error as? URLError)?.code, .notConnectedToInternet)
     }
@@ -106,5 +104,21 @@ private struct ThreadProbe: Decodable, Sendable {
 
     init(from decoder: any Decoder) throws {
         decodedOnMainThread = Thread.isMainThread
+    }
+}
+
+private struct Payload: Decodable, Sendable, Equatable {
+    let status: String
+    let data: [Pool]
+
+    struct Pool: Decodable, Sendable, Equatable {
+        let pool: String
+        let apy: Double
+    }
+}
+
+extension Data {
+    init(json: String) {
+        self = Data(json.utf8)
     }
 }
