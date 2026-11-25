@@ -8,7 +8,7 @@
 import XCTest
 import SwiftData
 @testable import DeHunt
-import DeHuntKit
+import Networking
 
 @MainActor
 final class StrategiesViewModelTests: XCTestCase {

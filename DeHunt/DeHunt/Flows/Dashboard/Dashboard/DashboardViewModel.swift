@@ -7,7 +7,7 @@
 
 import Foundation
 import Observation
-import DeHuntKit
+import Networking
 
 @Observable
 @MainActor

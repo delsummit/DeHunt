@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		63B48AC030B6471A00EE67CA /* DeHuntKit in Frameworks */ = {isa = PBXBuildFile; productRef = 63B48ABF30B6471A00EE67CA /* DeHuntKit */; };
+		63FD8CD230B6867D000F044D /* DefiLlama in Frameworks */ = {isa = PBXBuildFile; productRef = 63FD8CD130B6867D000F044D /* DefiLlama */; };
+		63FD8CD430B68681000F044D /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 63FD8CD330B68681000F044D /* Networking */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +56,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63B48AC030B6471A00EE67CA /* DeHuntKit in Frameworks */,
+				63FD8CD430B68681000F044D /* Networking in Frameworks */,
+				63FD8CD230B6867D000F044D /* DefiLlama in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +126,8 @@
 			);
 			name = DeHunt;
 			packageProductDependencies = (
-				63B48ABF30B6471A00EE67CA /* DeHuntKit */,
+				63FD8CD130B6867D000F044D /* DefiLlama */,
+				63FD8CD330B68681000F044D /* Networking */,
 			);
 			productName = Genora;
 			productReference = 63D6BE4C2EEF2D84005D6163 /* DeHunt.app */;
@@ -488,9 +491,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		63B48ABF30B6471A00EE67CA /* DeHuntKit */ = {
+		63FD8CD130B6867D000F044D /* DefiLlama */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = DeHuntKit;
+			productName = DefiLlama;
+		};
+		63FD8CD330B68681000F044D /* Networking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63B48ABE30B6471A00EE67CA /* XCLocalSwiftPackageReference "Packages/DeHuntKit" */;
+			productName = Networking;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

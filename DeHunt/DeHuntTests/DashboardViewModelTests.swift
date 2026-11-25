@@ -7,7 +7,7 @@
 
 import XCTest
 @testable import DeHunt
-import DeHuntKit
+import Networking
 
 @MainActor
 final class DashboardViewModelTests: XCTestCase {

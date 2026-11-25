@@ -7,7 +7,7 @@
 
 import XCTest
 @testable import DeHunt
-import DeHuntKit
+import Networking
 
 final class ServicesTests: XCTestCase {
 

@@ -11,25 +11,29 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "DeHuntKit",
-            targets: ["DeHuntKit"]
+            name: "Networking",
+            targets: ["Networking"]
+        ),
+        .library(
+            name: "DefiLlama",
+            targets: ["DefiLlama"]
         ),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "DeHuntKit",
+            name: "Networking",
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],
         ),
-        .testTarget(
-            name: "DeHuntKitTests",
-            dependencies: ["DeHuntKit"],
+        .target(
+            name: "DefiLlama",
+            dependencies: ["Networking"],
             swiftSettings: [
-                .enableUpcomingFeature("ApproachableConcurrency"),
-            ],
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
         ),
     ]
 )

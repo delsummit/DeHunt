@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import DeHuntKit
+import DefiLlama
+import Networking
 
 nonisolated protocol PoolChartServiceProtocol: Sendable {
     func fetchPoolChart(poolId: String) async throws -> [PoolChartPoint]
