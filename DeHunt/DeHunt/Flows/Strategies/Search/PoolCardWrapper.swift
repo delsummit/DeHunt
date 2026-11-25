@@ -5,6 +5,7 @@
 //  Created by Rostyslav Mukoida on 25/02/2026.
 //
 import SwiftUI
+import DefiLlama
 
 struct PoolCardWrapper: View {
     let pool: YieldPool

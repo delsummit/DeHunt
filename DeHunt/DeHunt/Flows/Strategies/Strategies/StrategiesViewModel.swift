@@ -9,6 +9,7 @@ import Foundation
 import Observation
 import Combine
 import SwiftData
+import DefiLlama
 
 @Observable
 final class StrategiesViewModel {

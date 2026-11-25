@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import DefiLlama
 @testable import DeHunt
 @testable import Networking
 

@@ -8,6 +8,7 @@
 import Foundation
 import Observation
 import Networking
+import DefiLlama
 
 @Observable
 @MainActor

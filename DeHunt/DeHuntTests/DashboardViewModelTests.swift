@@ -6,8 +6,10 @@
 //
 
 import XCTest
-@testable import DeHunt
 import Networking
+import DefiLlama
+@testable import DeHunt
+
 
 @MainActor
 final class DashboardViewModelTests: XCTestCase {

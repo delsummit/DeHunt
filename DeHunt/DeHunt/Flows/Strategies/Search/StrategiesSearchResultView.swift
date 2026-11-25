@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DefiLlama
 
 struct StrategiesSearchResultView: View {
     let pools: [YieldPool]
