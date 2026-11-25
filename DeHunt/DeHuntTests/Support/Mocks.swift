@@ -7,8 +7,9 @@
 
 import Foundation
 import Synchronization
-@testable import DeHunt
 import Networking
+@testable import DeHunt
+@testable import DefiLlama
 
 final class MockAPIService: APIServiceProtocol {
     private let responses: [String: Data]

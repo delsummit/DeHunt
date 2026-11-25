@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import DefiLlama
 @testable import DeHunt
 
 final class WatchlistRefresherTests: XCTestCase {

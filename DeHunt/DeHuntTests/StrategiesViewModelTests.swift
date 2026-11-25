@@ -7,8 +7,9 @@
 
 import XCTest
 import SwiftData
-@testable import DeHunt
 import Networking
+@testable import DeHunt
+@testable import DefiLlama
 
 @MainActor
 final class StrategiesViewModelTests: XCTestCase {

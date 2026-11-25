@@ -7,14 +7,14 @@
 
 import Foundation
 
-nonisolated struct ProtocolsTVL: Decodable, Sendable {
+public struct ProtocolsTVL: Decodable, Sendable {
     let id: String
-    let name: String
+    public let name: String
     let symbol: String?
-    let category: String?
-    let chains: [String]?
-    let tvl: Double?
+    public let category: String?
+    public let chains: [String]?
+    public let tvl: Double?
     let chainTvls: [String: Double]?
-    let change_1d: Double?
+    public let change_1d: Double?
     let change_7d: Double?
 }

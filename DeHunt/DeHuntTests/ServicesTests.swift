@@ -8,6 +8,7 @@
 import XCTest
 @testable import DeHunt
 import Networking
+@testable import DefiLlama
 
 final class ServicesTests: XCTestCase {
 

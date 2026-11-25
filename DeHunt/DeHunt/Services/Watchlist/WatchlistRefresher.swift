@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DefiLlama
 
 nonisolated struct PoolSnapshot: Sendable, Equatable {
     let apy: Double
