@@ -1,13 +1,13 @@
 //
 //  DefiLlamaEndpoint.swift
-//  DeHunt
+//  DeHuntKit
 //
-//  Created by Rostyslav Mukoida on 25/12/2025.
+//  Created by Rostyslav Mukoida on 25/12/2025. Moved to DeHuntKit package on 25/11/2026
 //
 
 import Foundation
 
-nonisolated enum DefiLlamaEndpoint {
+public enum DefiLlamaEndpoint {
     case protocols
     case historicalChainTVL
     case yieldPools
@@ -38,7 +38,7 @@ nonisolated enum DefiLlamaEndpoint {
         }
     }
 
-    var url: String {
+    public var url: String {
         baseURL + path
     }
 }
