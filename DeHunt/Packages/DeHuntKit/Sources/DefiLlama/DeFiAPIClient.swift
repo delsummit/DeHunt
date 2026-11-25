@@ -6,11 +6,10 @@
 //
 
 import Foundation
-import DefiLlama
 
 // MARK: - API Client Protocol
 
-nonisolated protocol DeFiAPIClientProtocol: Sendable {
+public protocol DeFiAPIClientProtocol: Sendable {
     func fetchProtocols() async throws -> [ProtocolsTVL]
     func fetchHistoricalTVL() async throws -> [HistoricalTVL]
     func fetchYieldPools() async throws -> [YieldPool]
@@ -19,18 +18,22 @@ nonisolated protocol DeFiAPIClientProtocol: Sendable {
 
 // MARK: - API Client
 
-nonisolated final class DeFiAPIClient: DeFiAPIClientProtocol {
+public final class DeFiAPIClient: DeFiAPIClientProtocol {
 
     private let protocols: any ProtocolsServiceProtocol
     private let tvl: any HistoricalTVLServiceProtocol
     private let yieldPools: any YieldPoolServiceProtocol
     private let poolCharts: any PoolChartServiceProtocol
 
+    public convenience init() {
+        self.init(protocols: ProtocolsService(), tvl: HistoricalTVLService(), yieldPools: YieldPoolService(), poolCharts: PoolChartService())
+    }
+    
     init(
-        protocols: any ProtocolsServiceProtocol = ProtocolsService(),
-        tvl: any HistoricalTVLServiceProtocol = HistoricalTVLService(),
-        yieldPools: any YieldPoolServiceProtocol = YieldPoolService(),
-        poolCharts: any PoolChartServiceProtocol = PoolChartService()
+        protocols: any ProtocolsServiceProtocol,
+        tvl: any HistoricalTVLServiceProtocol,
+        yieldPools: any YieldPoolServiceProtocol,
+        poolCharts: any PoolChartServiceProtocol
     ) {
         self.protocols = protocols
         self.tvl = tvl
@@ -38,19 +41,19 @@ nonisolated final class DeFiAPIClient: DeFiAPIClientProtocol {
         self.poolCharts = poolCharts
     }
 
-    func fetchProtocols() async throws -> [ProtocolsTVL] {
+    public func fetchProtocols() async throws -> [ProtocolsTVL] {
         try await protocols.fetchProtocols()
     }
 
-    func fetchHistoricalTVL() async throws -> [HistoricalTVL] {
+    public func fetchHistoricalTVL() async throws -> [HistoricalTVL] {
         try await tvl.fetchHistoricalTVL()
     }
 
-    func fetchYieldPools() async throws -> [YieldPool] {
+    public func fetchYieldPools() async throws -> [YieldPool] {
         try await yieldPools.fetchYieldPools()
     }
 
-    func fetchPoolChart(poolId: String) async throws -> [PoolChartPoint] {
+    public func fetchPoolChart(poolId: String) async throws -> [PoolChartPoint] {
         try await poolCharts.fetchPoolChart(poolId: poolId)
     }
 }

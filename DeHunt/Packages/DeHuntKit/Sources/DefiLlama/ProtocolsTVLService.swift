@@ -7,13 +7,12 @@
 
 import Foundation
 import Networking
-import DefiLlama
 
-nonisolated protocol ProtocolsServiceProtocol: Sendable {
+protocol ProtocolsServiceProtocol: Sendable {
     func fetchProtocols() async throws -> [ProtocolsTVL]
 }
 
-nonisolated final class ProtocolsService: ProtocolsServiceProtocol {
+final class ProtocolsService: ProtocolsServiceProtocol {
     
     private let apiService: any APIServiceProtocol
     

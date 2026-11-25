@@ -6,14 +6,13 @@
 //
 
 import Foundation
-import DefiLlama
 import Networking
 
-nonisolated protocol PoolChartServiceProtocol: Sendable {
+protocol PoolChartServiceProtocol: Sendable {
     func fetchPoolChart(poolId: String) async throws -> [PoolChartPoint]
 }
 
-nonisolated final class PoolChartService: PoolChartServiceProtocol {
+final class PoolChartService: PoolChartServiceProtocol {
 
     private let apiService: any APIServiceProtocol
 

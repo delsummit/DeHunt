@@ -7,13 +7,12 @@
 
 import Foundation
 import Networking
-import DefiLlama
 
-nonisolated protocol HistoricalTVLServiceProtocol: Sendable {
+protocol HistoricalTVLServiceProtocol: Sendable {
     func fetchHistoricalTVL() async throws -> [HistoricalTVL]
 }
 
-nonisolated final class HistoricalTVLService: HistoricalTVLServiceProtocol {
+final class HistoricalTVLService: HistoricalTVLServiceProtocol {
     
     private let apiService: any APIServiceProtocol
     

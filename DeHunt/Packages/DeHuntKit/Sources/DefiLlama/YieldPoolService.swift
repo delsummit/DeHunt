@@ -7,13 +7,12 @@
 
 import Foundation
 import Networking
-import DefiLlama
 
-nonisolated protocol YieldPoolServiceProtocol: Sendable {
+protocol YieldPoolServiceProtocol: Sendable {
     func fetchYieldPools() async throws -> [YieldPool]
 }
 
-nonisolated final class YieldPoolService: YieldPoolServiceProtocol {
+final class YieldPoolService: YieldPoolServiceProtocol {
     
     private let apiService: any APIServiceProtocol
     
