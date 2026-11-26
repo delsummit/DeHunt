@@ -5,23 +5,20 @@
 //  Created by Rostyslav Mukoida on 10/11/2026.
 //
 
-import XCTest
+import Foundation
+import Testing
 @testable import Networking
 
-final class APIServiceTests: XCTestCase {
+@Suite(.serialized)
+struct APIServiceTests {
 
     private let endpoint = "https://yields.llama.fi/pools"
-
-    override func tearDown() {
-        StubURLProtocol.handler = nil
-        super.tearDown()
-    }
 
     private func makeSUT() -> APIService {
         APIService(session: StubURLProtocol.makeSession())
     }
 
-    func testDecodesSuccessfulResponse() async throws {
+    @Test func decodesSuccessfulResponse() async throws {
         StubURLProtocol.respond(status: 200, body: Data(json: """
         {"status": "success", "data": [
           {"pool": "p1", "chain": "Ethereum", "project": "lido", "symbol": "STETH",
@@ -31,12 +28,12 @@ final class APIServiceTests: XCTestCase {
 
         let response: Payload = try await makeSUT().fetch(from: endpoint)
 
-        XCTAssertEqual(response.data, [
+        #expect(response.data == [
             Payload.Pool(pool: "p1", apy: 2.25)
         ])
     }
 
-    func testRequestsTheGivenURL() async throws {
+    @Test func requestsTheGivenURL() async throws {
         var requestedURL: URL?
         StubURLProtocol.handler = { request in
             requestedURL = request.url
@@ -46,52 +43,52 @@ final class APIServiceTests: XCTestCase {
 
         let _: Payload = try await makeSUT().fetch(from: endpoint)
 
-        XCTAssertEqual(requestedURL?.absoluteString, endpoint)
+        #expect(requestedURL?.absoluteString == endpoint)
     }
 
-    func testNon200StatusThrowsInvalidResponse() async {
+    @Test func non200StatusThrowsInvalidResponse() async {
         StubURLProtocol.respond(status: 500, body: Data(json: #"{"status": "success", "data": []}"#))
 
         let error = await fetchError(Payload.self)
 
-        XCTAssertEqual(error as? LlamaAPIError, .invalidResponse)
+        #expect(error as? LlamaAPIError == .invalidResponse)
     }
 
-    func testMalformedJSONThrowsInvalidData() async {
+    @Test func malformedJSONThrowsInvalidData() async {
         StubURLProtocol.respond(status: 200, body: Data(json: #"{"status": "success", "data": [{"pool": 1}]}"#))
 
         let error = await fetchError(Payload.self)
 
-        XCTAssertEqual(error as? LlamaAPIError, .invalidData)
+        #expect(error as? LlamaAPIError == .invalidData)
     }
 
-    func testEmptyEndpointThrowsInvalidURL() async {
+    @Test func emptyEndpointThrowsInvalidURL() async {
         let error = await fetchError(Payload.self, endpoint: "")
 
-        XCTAssertEqual(error as? LlamaAPIError, .invalidURL)
+        #expect(error as? LlamaAPIError == .invalidURL)
     }
 
-    func testNetworkErrorIsPassedThrough() async {
+    @Test func networkErrorIsPassedThrough() async {
         StubURLProtocol.handler = { _ in throw URLError(.notConnectedToInternet) }
 
         let error = await fetchError(Payload.self)
 
-        XCTAssertEqual((error as? URLError)?.code, .notConnectedToInternet)
+        #expect((error as? URLError)?.code == .notConnectedToInternet)
     }
 
-    @MainActor
-    func testDecodesOffTheMainThreadWhenCalledFromMainActor() async throws {
+    @MainActor @Test
+    func decodesOffTheMainThreadWhenCalledFromMainActor() async throws {
         StubURLProtocol.respond(status: 200, body: Data(json: "{}"))
 
         let probe: ThreadProbe = try await makeSUT().fetch(from: endpoint)
 
-        XCTAssertFalse(probe.decodedOnMainThread)
+        #expect(!probe.decodedOnMainThread)
     }
 
     private func fetchError<T: Decodable & Sendable>(_ type: T.Type, endpoint: String? = nil) async -> (any Error)? {
         do {
             let _: T = try await makeSUT().fetch(from: endpoint ?? self.endpoint)
-            XCTFail("Expected fetch to throw")
+            Issue.record("Expected fetch to throw")
             return nil
         } catch {
             return error
