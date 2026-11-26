@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design
 
 struct StrategiesUserInputMoneyView: View {
     @Bindable var viewModel: StrategiesViewModel

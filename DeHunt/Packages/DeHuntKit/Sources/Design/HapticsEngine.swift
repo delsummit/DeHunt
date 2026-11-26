@@ -8,11 +8,12 @@
 import CoreHaptics
 import SwiftUI
 
-final class HapticsEngine {
-    static let shared = HapticsEngine()
+@MainActor
+public final class HapticsEngine {
+    public static let shared = HapticsEngine()
     private var engine: CHHapticEngine?
     
-    func prepareHaptics() {
+    public func prepareHaptics() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
         
         do {
@@ -23,31 +24,7 @@ final class HapticsEngine {
         }
     }
     
-    func complexSuccess() {
-        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
-        
-        var events = [CHHapticEvent]()
-        
-        for i in stride(from: 0.0, to: 1, by: 0.1) {
-            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(i))
-            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(i))
-            let event = CHHapticEvent(
-                eventType: .hapticTransient,
-                parameters: [intensity, sharpness],
-                relativeTime: i)
-            events.append(event)
-        }
-        
-        do {
-            let pattern = try CHHapticPattern(events: events, parameters: [])
-            let player = try engine?.makePlayer(with: pattern)
-            try player?.start(atTime: 0)
-        } catch {
-            // TODO: Handle errors
-        }
-    }
-    
-    func select() {
+    public func select() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
         
         let intensityParam = CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.9)
@@ -68,7 +45,7 @@ final class HapticsEngine {
         }
     }
     
-    func lightTap() {
+    public func lightTap() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
         
         let intensityParam = CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.4)
@@ -89,7 +66,7 @@ final class HapticsEngine {
         }
     }
     
-    func milestone() {
+    public func milestone() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
         
         let intensityParam = CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.6)

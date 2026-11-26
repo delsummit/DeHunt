@@ -8,6 +8,7 @@
 import SwiftUI
 import Charts
 import DefiLlama
+import Design
 
 struct TVLChartView: View {
     let viewModel: DashboardViewModel

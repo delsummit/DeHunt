@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design
 
 struct DashboardView: View {
     @State private var viewModel = DashboardViewModel()

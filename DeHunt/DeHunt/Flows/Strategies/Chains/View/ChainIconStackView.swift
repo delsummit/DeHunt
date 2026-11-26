@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design
 
 struct ChainIconStackView: View {
     let chains: [BlockchainChain]

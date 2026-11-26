@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design
 
 struct MarketOverviewCardSkeleton: View {
     var body: some View {

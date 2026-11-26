@@ -8,6 +8,7 @@
 import XCTest
 import SwiftData
 import Networking
+import Watchlist
 @testable import DeHunt
 @testable import DefiLlama
 

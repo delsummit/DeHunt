@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design
 
 struct StrategiesAPYSliderView: View {
     @Bindable var viewModel: StrategiesViewModel

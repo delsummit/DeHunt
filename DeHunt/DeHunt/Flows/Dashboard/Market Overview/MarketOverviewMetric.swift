@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design
 
 // MARK: - Market Overview Metric Types
 enum MarketOverviewMetric: Identifiable {

@@ -18,6 +18,14 @@ let package = Package(
             name: "DefiLlama",
             targets: ["DefiLlama"]
         ),
+        .library(
+            name: "Watchlist",
+            targets: ["Watchlist"]
+        ),
+        .library(
+            name: "Design",
+            targets: ["Design"]
+        ),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -31,6 +39,19 @@ let package = Package(
         .target(
             name: "DefiLlama",
             dependencies: ["Networking"],
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
+        ),
+        .target(
+            name: "Watchlist",
+            dependencies: ["DefiLlama"],
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
+        ),
+        .target(
+            name: "Design",
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency")
             ]

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import Design
 
 struct StrategiesView: View {
     @Environment(\.modelContext) private var modelContext

@@ -53,7 +53,7 @@ extension UIColor {
 }
 
 // MARK: - App Color Palette
-extension Color {
+public extension Color {
     // MARK: - Background Colors
     static let backgroundPrimary = Color(
         light: Color(hex: "#f6b1b1"),
@@ -135,7 +135,7 @@ extension Color {
     )
 }
 
-extension ShapeStyle where Self == Color {
+public extension ShapeStyle where Self == Color {
     static var buttonPrimary: Color { Color.buttonPrimary }
     static var buttonSecondary: Color { Color.buttonSecondary }
     static var backgroundPrimary: Color { Color.backgroundPrimary }

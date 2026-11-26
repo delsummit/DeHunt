@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design
 
 struct MarketOverviewCard: View {
     let metric: MarketOverviewMetric

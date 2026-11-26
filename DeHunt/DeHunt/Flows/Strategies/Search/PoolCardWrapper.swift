@@ -6,6 +6,7 @@
 //
 import SwiftUI
 import DefiLlama
+import Design
 
 struct PoolCardWrapper: View {
     let pool: YieldPool

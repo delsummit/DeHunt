@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6311A72E30B81D1400022E40 /* Watchlist in Frameworks */ = {isa = PBXBuildFile; productRef = 6311A72D30B81D1400022E40 /* Watchlist */; };
+		6311A73030B8221700022E40 /* Design in Frameworks */ = {isa = PBXBuildFile; productRef = 6311A72F30B8221700022E40 /* Design */; };
 		63FD8CD230B6867D000F044D /* DefiLlama in Frameworks */ = {isa = PBXBuildFile; productRef = 63FD8CD130B6867D000F044D /* DefiLlama */; };
 		63FD8CD430B68681000F044D /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 63FD8CD330B68681000F044D /* Networking */; };
 /* End PBXBuildFile section */
@@ -57,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6311A73030B8221700022E40 /* Design in Frameworks */,
+				6311A72E30B81D1400022E40 /* Watchlist in Frameworks */,
 				63FD8CD430B68681000F044D /* Networking in Frameworks */,
 				63FD8CD230B6867D000F044D /* DefiLlama in Frameworks */,
 			);
@@ -65,6 +69,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6311A72C30B81D1400022E40 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		63D6BE432EEF2D84005D6163 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +83,7 @@
 				63B48ABB30B646AE00EE67CA /* Packages */,
 				63D6BE4E2EEF2D84005D6163 /* DeHunt */,
 				6327A5AC2F1D60DE00F358C8 /* DeHuntTests */,
+				6311A72C30B81D1400022E40 /* Frameworks */,
 				63D6BE4D2EEF2D84005D6163 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,6 +142,8 @@
 			packageProductDependencies = (
 				63FD8CD130B6867D000F044D /* DefiLlama */,
 				63FD8CD330B68681000F044D /* Networking */,
+				6311A72D30B81D1400022E40 /* Watchlist */,
+				6311A72F30B8221700022E40 /* Design */,
 			);
 			productName = Genora;
 			productReference = 63D6BE4C2EEF2D84005D6163 /* DeHunt.app */;
@@ -493,6 +507,16 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6311A72D30B81D1400022E40 /* Watchlist */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63B48ABE30B6471A00EE67CA /* XCLocalSwiftPackageReference "Packages/DeHuntKit" */;
+			productName = Watchlist;
+		};
+		6311A72F30B8221700022E40 /* Design */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63B48ABE30B6471A00EE67CA /* XCLocalSwiftPackageReference "Packages/DeHuntKit" */;
+			productName = Design;
+		};
 		63FD8CD130B6867D000F044D /* DefiLlama */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DefiLlama;

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design
 
 struct StrategiesChainSelectionView: View {
     @Bindable var viewModel: StrategiesViewModel

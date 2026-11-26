@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Watchlist
 @testable import DefiLlama
 @testable import DeHunt
 

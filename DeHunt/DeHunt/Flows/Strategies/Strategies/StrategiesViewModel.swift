@@ -10,6 +10,7 @@ import Observation
 import Combine
 import SwiftData
 import DefiLlama
+import Watchlist
 
 @Observable
 final class StrategiesViewModel {

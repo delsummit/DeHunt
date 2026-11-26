@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design
 
 struct ChainChip: View {
     let chain: BlockchainChain

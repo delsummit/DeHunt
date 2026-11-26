@@ -8,22 +8,27 @@
 import Foundation
 import DefiLlama
 
-nonisolated struct PoolSnapshot: Sendable, Equatable {
+public struct PoolSnapshot: Sendable, Equatable {
     let apy: Double
     let tvlUsd: Double
+    
+    public init(apy: Double, tvlUsd: Double) {
+        self.apy = apy
+        self.tvlUsd = tvlUsd
+    }
 }
 
-nonisolated struct WatchlistRefresher: Sendable {
+public struct WatchlistRefresher: Sendable {
 
     private let apiClient: any DeFiAPIClientProtocol
     private let maxConcurrentRequests: Int
 
-    init(apiClient: any DeFiAPIClientProtocol, maxConcurrentRequests: Int = 4) {
+    public init(apiClient: any DeFiAPIClientProtocol, maxConcurrentRequests: Int = 4) {
         self.apiClient = apiClient
         self.maxConcurrentRequests = max(1, maxConcurrentRequests)
     }
 
-    func latestSnapshots(for poolIds: [String]) async -> [String: PoolSnapshot] {
+    public func latestSnapshots(for poolIds: [String]) async -> [String: PoolSnapshot] {
         var seen = Set<String>()
         var pending = poolIds.filter { seen.insert($0).inserted }.makeIterator()
 

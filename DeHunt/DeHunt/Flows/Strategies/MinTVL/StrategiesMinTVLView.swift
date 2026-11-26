@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design
 
 struct StrategiesMinTVLView: View {
     @Bindable var viewModel: StrategiesViewModel

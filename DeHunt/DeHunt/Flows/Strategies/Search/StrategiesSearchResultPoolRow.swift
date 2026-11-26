@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DefiLlama
+import Design
 
 struct StrategiesSearchResultPoolRow: View {
     let pool: YieldPool

@@ -10,17 +10,17 @@ import SwiftData
 import DefiLlama
 
 @Model
-final class WatchlistPool {
-    @Attribute(.unique) var poolId: String
+public final class WatchlistPool {
+    @Attribute(.unique) public var poolId: String
     var chain: String
     var project: String
     var symbol: String
-    var tvlUsd: Double
-    var apy: Double
-    var addedAt: Date
-    var updatedAt: Date
+    public var tvlUsd: Double
+    public var apy: Double
+    public var addedAt: Date
+    public var updatedAt: Date
 
-    init(pool: YieldPool, now: Date = .now) {
+    public init(pool: YieldPool, now: Date = .now) {
         self.poolId = pool.pool
         self.chain = pool.chain
         self.project = pool.project
@@ -31,11 +31,11 @@ final class WatchlistPool {
         self.updatedAt = now
     }
 
-    var yieldPool: YieldPool {
+    public var yieldPool: YieldPool {
         YieldPool(pool: poolId, chain: chain, project: project, symbol: symbol, tvlUsd: tvlUsd, apy: apy)
     }
 
-    func apply(_ snapshot: PoolSnapshot, at date: Date = .now) {
+    public func apply(_ snapshot: PoolSnapshot, at date: Date = .now) {
         apy = snapshot.apy
         tvlUsd = snapshot.tvlUsd
         updatedAt = date

@@ -7,6 +7,8 @@
 
 import SwiftUI
 import SwiftData
+import Watchlist
+import Design
 
 @main
 struct DeHuntApp: App {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design
 
 struct MarketOverviewGrid: View {
     let viewModel: DashboardViewModel

@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftData
 import DefiLlama
+import Watchlist
+import Design
 
 struct PoolWatchlistView: View {
     @Query(sort: \WatchlistPool.addedAt, order: .reverse) private var favoritePools: [WatchlistPool]
