@@ -151,7 +151,3 @@ struct StrategiesSearchResultView: View {
         )
     }
 }
-
-#Preview("Strategies") {
-    MainView()
-}

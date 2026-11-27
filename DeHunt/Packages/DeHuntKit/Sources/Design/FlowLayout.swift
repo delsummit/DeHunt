@@ -7,10 +7,15 @@
 
 import SwiftUI
 
-struct FlowLayout: Layout {
+public struct FlowLayout: Layout {
+    
+    public init(spacing: CGFloat) {
+        self.spacing = spacing
+    }
+    
     var spacing: CGFloat = 8
     
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+    public func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let result = FlowResult(
             in: proposal.replacingUnspecifiedDimensions().width,
             subviews: subviews,
@@ -19,7 +24,7 @@ struct FlowLayout: Layout {
         return result.size
     }
     
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+    public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         let result = FlowResult(
             in: bounds.width,
             subviews: subviews,

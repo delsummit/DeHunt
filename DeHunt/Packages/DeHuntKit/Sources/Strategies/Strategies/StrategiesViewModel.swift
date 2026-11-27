@@ -13,6 +13,7 @@ import DefiLlama
 import Watchlist
 
 @Observable
+@MainActor
 final class StrategiesViewModel {
     // MARK: - Properties
     var selectedChains: Set<BlockchainChain> = []

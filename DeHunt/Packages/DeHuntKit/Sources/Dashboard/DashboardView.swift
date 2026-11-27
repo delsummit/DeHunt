@@ -51,7 +51,7 @@ public struct DashboardView: View {
     @ViewBuilder
     private var defiLlamaMention: some View {
         HStack {
-            Image("defillama")
+            Image.defillamaLogo
                 .resizable()
                 .saturation(0)
                 .colorMultiply(Color.textPrimary)

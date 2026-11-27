@@ -30,7 +30,7 @@ struct StrategiesUserInputMoneyView: View {
         
         HStack {
             HStack {
-                Image("usdtLogo")
+                Image.usdtLogo
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24, height: 24)

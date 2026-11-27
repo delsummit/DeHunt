@@ -9,7 +9,9 @@ import SwiftUI
 import SwiftData
 import Design
 
-struct StrategiesView: View {
+public struct StrategiesView: View {
+    public init() { }
+    
     @Environment(\.modelContext) private var modelContext
     @State private var viewModel: StrategiesViewModel?
     
@@ -22,7 +24,7 @@ struct StrategiesView: View {
     @FocusState private var focusedField: FocusedField?
     @State private var showWatchlist = false
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             if let viewModel = viewModel {
                 ScrollView {
@@ -159,7 +161,7 @@ struct StrategiesView: View {
     
     private var defiLlamaMention: some View {
         HStack {
-            Image("defillama")
+            Image.defillamaLogo
                 .resizable()
                 .saturation(0)
                 .colorMultiply(Color.textPrimary)
