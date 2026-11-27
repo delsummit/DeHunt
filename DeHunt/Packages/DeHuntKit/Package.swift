@@ -78,6 +78,13 @@ let package = Package(
                 .enableUpcomingFeature("ApproachableConcurrency")
             ]
         ),
+        .target(
+            name: "DefiLlamaTestSupport",
+            dependencies: ["DefiLlama"],
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
+        ),
         .testTarget(
             name: "NetworkingTests",
             dependencies: ["Networking"],
@@ -91,6 +98,27 @@ let package = Package(
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency")
             ]
-        )
+        ),
+        .testTarget(
+            name: "WatchlistTests",
+            dependencies: ["DefiLlamaTestSupport", "Watchlist", "DefiLlama"],
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
+        ),
+        .testTarget(
+            name: "DashboardTests",
+            dependencies: ["DefiLlamaTestSupport", "Dashboard", "DefiLlama", "Networking"],
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
+        ),
+        .testTarget(
+            name: "StrategiesTests",
+            dependencies: ["DefiLlamaTestSupport", "Strategies", "Watchlist", "DefiLlama", "Networking"],
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
+        ),
     ]
 )

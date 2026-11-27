@@ -28,9 +28,23 @@
     },
     {
       "target" : {
-        "containerPath" : "container:DeHunt.xcodeproj",
-        "identifier" : "6327A5AA2F1D60DE00F358C8",
-        "name" : "DeHuntTests"
+        "containerPath" : "container:Packages\/DeHuntKit",
+        "identifier" : "StrategiesTests",
+        "name" : "StrategiesTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/DeHuntKit",
+        "identifier" : "WatchlistTests",
+        "name" : "WatchlistTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/DeHuntKit",
+        "identifier" : "DashboardTests",
+        "name" : "DashboardTests"
       }
     }
   ],

@@ -7,8 +7,8 @@
 
 import XCTest
 import Watchlist
+import DefiLlamaTestSupport
 @testable import DefiLlama
-@testable import DeHunt
 
 final class WatchlistRefresherTests: XCTestCase {
 

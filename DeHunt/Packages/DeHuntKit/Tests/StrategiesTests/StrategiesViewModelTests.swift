@@ -9,8 +9,8 @@ import XCTest
 import SwiftData
 import Networking
 import Watchlist
+import DefiLlamaTestSupport
 @testable import Strategies
-@testable import DeHunt
 @testable import DefiLlama
 
 @MainActor

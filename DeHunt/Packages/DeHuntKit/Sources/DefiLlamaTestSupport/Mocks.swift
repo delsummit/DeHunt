@@ -7,24 +7,25 @@
 
 import Foundation
 import Synchronization
-@testable import DeHunt
 @testable import DefiLlama
 
-struct MockDeFiAPIClient: DeFiAPIClientProtocol {
-    var protocols: Result<[ProtocolsTVL], any Error> = .success([])
-    var historicalTVL: Result<[HistoricalTVL], any Error> = .success([])
-    var yieldPools: Result<[YieldPool], any Error> = .success([])
-    var poolCharts: [String: Result<[PoolChartPoint], any Error>] = [:]
-    var chartDelay: Duration = .zero
-    let chartRequests = ChartRequestLog()
+public struct MockDeFiAPIClient: DeFiAPIClientProtocol {
+    public init() { }
+    
+    public var protocols: Result<[ProtocolsTVL], any Error> = .success([])
+    public var historicalTVL: Result<[HistoricalTVL], any Error> = .success([])
+    public var yieldPools: Result<[YieldPool], any Error> = .success([])
+    public var poolCharts: [String: Result<[PoolChartPoint], any Error>] = [:]
+    public var chartDelay: Duration = .zero
+    public let chartRequests = ChartRequestLog()
 
-    func fetchProtocols() async throws -> [ProtocolsTVL] { try protocols.get() }
+    public func fetchProtocols() async throws -> [ProtocolsTVL] { try protocols.get() }
 
-    func fetchHistoricalTVL() async throws -> [HistoricalTVL] { try historicalTVL.get() }
+    public func fetchHistoricalTVL() async throws -> [HistoricalTVL] { try historicalTVL.get() }
 
-    func fetchYieldPools() async throws -> [YieldPool] { try yieldPools.get() }
+    public func fetchYieldPools() async throws -> [YieldPool] { try yieldPools.get() }
 
-    func fetchPoolChart(poolId: String) async throws -> [PoolChartPoint] {
+    public func fetchPoolChart(poolId: String) async throws -> [PoolChartPoint] {
         chartRequests.begin(poolId)
         defer { chartRequests.end() }
         if chartDelay > .zero {
@@ -34,7 +35,7 @@ struct MockDeFiAPIClient: DeFiAPIClientProtocol {
     }
 }
 
-final class ChartRequestLog: Sendable {
+public final class ChartRequestLog: Sendable {
     private struct State {
         var requested: [String] = []
         var inFlight = 0
@@ -55,13 +56,13 @@ final class ChartRequestLog: Sendable {
         state.withLock { $0.inFlight -= 1 }
     }
 
-    var requested: [String] { state.withLock { $0.requested } }
+    public var requested: [String] { state.withLock { $0.requested } }
 
-    var peakInFlight: Int { state.withLock { $0.peakInFlight } }
+    public var peakInFlight: Int { state.withLock { $0.peakInFlight } }
 }
 
 extension YieldPool {
-    static func fixture(
+    public static func fixture(
         id: String = "pool-1",
         chain: String = "Ethereum",
         project: String = "aave-v3",
@@ -74,7 +75,7 @@ extension YieldPool {
 }
 
 extension ProtocolsTVL {
-    static func fixture(
+    public static func fixture(
         id: String = "1",
         name: String = "Aave",
         category: String? = "Lending",
@@ -89,4 +90,6 @@ extension ProtocolsTVL {
     }
 }
 
-struct TestError: Error {}
+public struct TestError: Error {
+    public init() { }
+}
