@@ -11,8 +11,6 @@
 		6311A73030B8221700022E40 /* Design in Frameworks */ = {isa = PBXBuildFile; productRef = 6311A72F30B8221700022E40 /* Design */; };
 		6311A73230B827ED00022E40 /* Dashboard in Frameworks */ = {isa = PBXBuildFile; productRef = 6311A73130B827ED00022E40 /* Dashboard */; };
 		6311A84830B9311C00022E40 /* Strategies in Frameworks */ = {isa = PBXBuildFile; productRef = 6311A84730B9311C00022E40 /* Strategies */; };
-		63FD8CD230B6867D000F044D /* DefiLlama in Frameworks */ = {isa = PBXBuildFile; productRef = 63FD8CD130B6867D000F044D /* DefiLlama */; };
-		63FD8CD430B68681000F044D /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 63FD8CD330B68681000F044D /* Networking */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,9 +62,7 @@
 				6311A73030B8221700022E40 /* Design in Frameworks */,
 				6311A84830B9311C00022E40 /* Strategies in Frameworks */,
 				6311A72E30B81D1400022E40 /* Watchlist in Frameworks */,
-				63FD8CD430B68681000F044D /* Networking in Frameworks */,
 				6311A73230B827ED00022E40 /* Dashboard in Frameworks */,
-				63FD8CD230B6867D000F044D /* DefiLlama in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,8 +140,6 @@
 			);
 			name = DeHunt;
 			packageProductDependencies = (
-				63FD8CD130B6867D000F044D /* DefiLlama */,
-				63FD8CD330B68681000F044D /* Networking */,
 				6311A72D30B81D1400022E40 /* Watchlist */,
 				6311A72F30B8221700022E40 /* Design */,
 				6311A73130B827ED00022E40 /* Dashboard */,
@@ -532,15 +526,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 63B48ABE30B6471A00EE67CA /* XCLocalSwiftPackageReference "Packages/DeHuntKit" */;
 			productName = Strategies;
-		};
-		63FD8CD130B6867D000F044D /* DefiLlama */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DefiLlama;
-		};
-		63FD8CD330B68681000F044D /* Networking */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 63B48ABE30B6471A00EE67CA /* XCLocalSwiftPackageReference "Packages/DeHuntKit" */;
-			productName = Networking;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
