@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Double {
+public extension Double {
     func formatted(decimals: Int = 1, currency: Bool = false) -> String {
         let absValue = abs(self)
         let sign = self < 0 ? "-" : ""

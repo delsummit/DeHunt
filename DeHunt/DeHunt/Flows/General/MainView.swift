@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Design
+import Dashboard
 
 struct MainView: View {
     @State private var selectedTab: String = "Dashboard"

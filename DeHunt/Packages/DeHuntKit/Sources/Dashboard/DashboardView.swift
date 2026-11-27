@@ -8,10 +8,10 @@
 import SwiftUI
 import Design
 
-struct DashboardView: View {
+public struct DashboardView: View {
     @State private var viewModel = DashboardViewModel()
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
@@ -68,6 +68,8 @@ struct DashboardView: View {
         }
         .padding()
     }
+    
+    public init() { }
 }
 
 #Preview {

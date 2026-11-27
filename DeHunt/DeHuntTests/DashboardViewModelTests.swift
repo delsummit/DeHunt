@@ -8,6 +8,7 @@
 import XCTest
 import Networking
 import DefiLlama
+@testable import Dashboard
 @testable import DeHunt
 
 

@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct SkeletonView<S: Shape>: View {
+public struct SkeletonView<S: Shape>: View {
     var shape: S
     var color: Color
     
-    init(_ shape: S, _ color: Color = .gray.opacity(0.3)) {
+    public init(_ shape: S, _ color: Color = .gray.opacity(0.3)) {
         self.shape = shape
         self.color = color
     }
     
     @State private var isAnimating: Bool = false
-    var body: some View {
+    public var body: some View {
         shape
             .fill(color)
             .overlay {

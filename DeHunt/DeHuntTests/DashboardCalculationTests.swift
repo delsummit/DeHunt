@@ -7,6 +7,7 @@
 
 import XCTest
 import DefiLlama
+@testable import Dashboard
 @testable import DeHunt
 
 @MainActor

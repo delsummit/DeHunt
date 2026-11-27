@@ -26,6 +26,10 @@ let package = Package(
             name: "Design",
             targets: ["Design"]
         ),
+        .library(
+            name: "Dashboard",
+            targets: ["Dashboard"]
+        ),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -52,6 +56,13 @@ let package = Package(
         ),
         .target(
             name: "Design",
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
+        ),
+        .target(
+            name: "Dashboard",
+            dependencies: ["Design", "Networking", "DefiLlama"],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency")
             ]
